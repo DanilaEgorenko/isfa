@@ -1,0 +1,11 @@
+<button class="menu-button" (click)="opened = !opened">Меню</button>
+
+<div *ngIf="opened" class="menu">
+    <nav>
+        <a routerLink="/stocks" routerLinkActive="active">Акции</a>
+        <a routerLink="/mutual-funds" routerLinkActive="active">Паи</a>
+        <a routerLink="/bonds" routerLinkActive="active">Облигации</a>
+        <a routerLink="/crypto" routerLinkActive="active">Криптовалюта</a>
+        <a routerLink="/futures" routerLinkActive="active">Фьючерсы</a>
+    </nav>
+</div>

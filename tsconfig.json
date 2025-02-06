@@ -23,7 +23,7 @@
       "@shared": ["src/app/shared"],
       "@shared/*": ["src/app/shared/*"],
       "@assets/*": ["src/assets/*"],
-      "@core/*": ["src/app/core/*"]
+      "@core/*": ["src/app/core/*"],
     }
   },
   "angularCompilerOptions": {

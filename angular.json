@@ -6,11 +6,12 @@
     "isfa": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:component": {
+          "changeDetection": "OnPush",
+          "style": "scss"
         }
       },
       "root": "",
@@ -27,7 +28,6 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
