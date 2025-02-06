@@ -1,0 +1,17 @@
+.profile {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: var(--color-gray);
+    border-radius: 20px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+
+    background-image: url(https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg);
+    background-position: center;
+    background-size: contain;
+
+    border: 2px var(--color-gray) solid;
+}

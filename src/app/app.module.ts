@@ -4,9 +4,10 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { MenuComponent } from "./components/menu/menu.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 
 @NgModule({
-    declarations: [AppComponent, MenuComponent],
+    declarations: [AppComponent, MenuComponent, ProfileComponent],
     imports: [BrowserModule, AppRoutingModule],
     bootstrap: [AppComponent],
 })
