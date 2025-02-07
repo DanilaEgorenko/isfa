@@ -12,7 +12,7 @@
     font-size: 1rem;
     transition: 0.3s;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 10000;
 
     &:hover {
         transform: scale(1.2);
@@ -26,6 +26,7 @@
     height: 100%;
     width: 100%;
     background: var(--color-gray);
+    z-index: 1000;
 }
 
 nav {

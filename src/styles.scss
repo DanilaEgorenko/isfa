@@ -1,8 +1,13 @@
 :root {
-    --color-orange: #f75708;
+    --color-red: #f75708;
     --color-gray: #e4dccf;
     --color-black: #191919;
     --color-green: #1b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
 html {
