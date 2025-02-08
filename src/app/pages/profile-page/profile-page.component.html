@@ -27,36 +27,4 @@
             </button>
         </div>
     </div>
-
-    <div class="container">
-        <h2>Достижения</h2>
-        <div
-            class="achievements"
-            *ngFor="let achievement of profileInfo.achievements"
-        >
-            <div
-                class="achievement"
-                [title]="ACHIEVEMENT_MAP[achievement.name].title"
-            >
-                <div
-                    class="achievement-logo"
-                    [ngStyle]="{
-                        'animation-duration': getAnimationDuration(
-                            achievement.value
-                        ),
-                        'background-image':
-                            'url(' +
-                            ACHIEVEMENT_MAP[achievement.name].logo +
-                            ')'
-                    }"
-                ></div>
-                <p
-                    *ngIf="ACHIEVEMENT_MAP[achievement.name].showValue"
-                    class="achievement-value"
-                >
-                    {{ achievement.value >= 100 ? "99+" : achievement.value }}
-                </p>
-            </div>
-        </div>
-    </div>
 </div>
