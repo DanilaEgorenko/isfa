@@ -1,30 +1,54 @@
-<h1>Дорабатываю профиль, зайдите позже👷</h1>
-
 <div *ngIf="profileInfo$ | async as profileInfo" class="profile-page">
-    <div class="image"></div>
-    <p class="name">{{ profileInfo.name }}</p>
-    <p class="last-login">{{ profileInfo.last_login }}</p>
-    <p *ngIf="profileInfo.status" class="status">{{ profileInfo.status }}</p>
+    <div class="profile-header">
+        <div
+            class="image"
+            [ngStyle]="{ 'background-image': 'url(' + profileInfo.pic + ')' }"
+        ></div>
+        <div class="container name-status">
+            <h2 class="name">{{ profileInfo.name }}</h2>
+            <p *ngIf="profileInfo.status" class="status">
+                {{ profileInfo.status }}
+            </p>
+        </div>
 
-    <div class="container">
-        <h2>Рейтинг</h2>
-        <p
-            title="Насколько профиль любим пользователями"
-            class="rating-score"
-            [ngStyle]="{
-                color:
-                    profileInfo.rating >= 0
-                        ? 'var(--color-green)'
-                        : 'var(--color-red)'
-            }"
-        >
-            {{ profileInfo.rating }}
-        </p>
-        <div class="rating-buttons">
-            <button class="rating-button add_rating" title="Добавить">+</button>
-            <button class="rating-button remove_rating" title="Снизить">
-                –
-            </button>
+        <div class="container">
+            <h2>Рейтинг</h2>
+            <p
+                title="Насколько профиль любим пользователями"
+                class="rating-score"
+                [ngStyle]="{
+                    color:
+                        profileInfo.rating >= 0
+                            ? 'var(--color-green)'
+                            : 'var(--color-red)'
+                }"
+            >
+                {{ profileInfo.rating }}
+            </p>
+            <div class="rating-buttons">
+                <button class="rating-button add_rating" title="Добавить">
+                    +
+                </button>
+                <button class="rating-button remove_rating" title="Снизить">
+                    –
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container favorites">
+            <h2>Избранное</h2>
+            <div *ngIf="profileInfo.favorites.length; else empty"></div>
+        </div>
+
+        <div class="container virtual-portfolio">
+            <h2>Виртуальный портфель</h2>
+            <div *ngIf="profileInfo?.virtual_portfolio; else empty"></div>
         </div>
     </div>
 </div>
+
+<ng-template #empty>
+    <p>Пусто</p>
+</ng-template>

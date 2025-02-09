@@ -1,12 +1,46 @@
+.profile-page {
+    display: block;
+    margin: 0 60px;
+}
+
 .container {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 20px;
     border: 5px var(--color-gray) solid;
     border-radius: 20px;
     padding: 20px;
     margin: 20px;
     align-items: center;
+    justify-content: center;
+    min-height: 150px;
+
+    & h2 {
+        text-align: center;
+    }
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+    background-color: var(--color-gray);
+    align-self: center;
+}
+
+.name-status {
+    width: 40%;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
 }
 
 .rating {
@@ -39,4 +73,23 @@
     display: flex;
     align-items: baseline;
     justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .profile-page {
+        margin: 0 20px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+    }
+
+    .name-status {
+        width: auto;
+    }
 }

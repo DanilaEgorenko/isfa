@@ -11,7 +11,7 @@ import { MainApiService } from "./main-api.service";
 })
 export class MainPageComponent {
     constructor(private mainApiService: MainApiService) {
-        this.mainApiService.getApi().subscribe((data) => console.log(data));
+        this.mainApiService.getCrypro().subscribe((data) => console.log(data));
 
         this.mainApiService.getLogoCompany("RU000A0D8MM8").subscribe();
     }
