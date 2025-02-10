@@ -1,4 +1,4 @@
 <header>
     <button *ngIf="!(isMainPage$ | async)" (click)="back()">Назад</button>
-    <a routerLink="/profile"><div class="profile"></div></a>
+    <a [routerLink]="['profile', 1]"><div class="profile"></div></a>
 </header>

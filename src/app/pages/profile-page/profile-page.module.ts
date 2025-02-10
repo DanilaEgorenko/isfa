@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { ProfilePageComponent } from "./profile-page.component";
 import { RouterModule } from "@angular/router";
 
-const routes = [{ path: "", component: ProfilePageComponent }];
+const routes = [{ path: ":id", component: ProfilePageComponent }];
 
 @NgModule({
     imports: [CommonModule, RouterModule.forChild(routes)],

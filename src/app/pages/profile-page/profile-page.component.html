@@ -1,4 +1,7 @@
-<div *ngIf="profileInfo$ | async as profileInfo" class="profile-page">
+<ng-template
+    *ngIf="profileInfo$ | async as profileInfo; else undefinedProfile"
+    #contentTemplate
+>
     <div class="profile-header">
         <div
             class="image"
@@ -47,8 +50,12 @@
             <div *ngIf="profileInfo?.virtual_portfolio; else empty"></div>
         </div>
     </div>
-</div>
+</ng-template>
 
 <ng-template #empty>
     <p>Пусто</p>
+</ng-template>
+
+<ng-template #undefinedProfile>
+    <h2>Такого пользователя не существует =(</h2>
 </ng-template>

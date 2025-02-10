@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { ProfileService } from "@app/services/profile.service";
 import { of } from "rxjs";
 
@@ -10,7 +11,15 @@ import { of } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePageComponent {
-    profileInfo$ = this.profileService.getData(1);
+    readonly id = Number(this.route.snapshot.paramMap.get("id"));
 
-    constructor(private profileService: ProfileService) {}
+    profileInfo$ = this.profileService.getData(this.id);
+    isLoading$ = this.profileService.isLoading$;
+
+    constructor(
+        private profileService: ProfileService,
+        private route: ActivatedRoute
+    ) {
+        this.isLoading$.subscribe((data) => console.log(data));
+    }
 }

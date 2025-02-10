@@ -8,7 +8,8 @@ export class MainApiService {
 
     getApi() {
         return this.http.get(
-            "http://iss.moex.com/iss/engines/stock/markets/shares/securities"
+            "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/dates"
+            // "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json?iss.json=extended&iss.data=on"
         );
         //markets/shares - stocks and etfs
         //market/bonds - bonds

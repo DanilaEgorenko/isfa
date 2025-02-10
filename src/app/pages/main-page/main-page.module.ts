@@ -3,11 +3,17 @@ import { CommonModule } from "@angular/common";
 import { MainPageComponent } from "./main-page.component";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
+import { ItemModule } from "@app/components/item/item.module";
 
 const routes = [{ path: "", component: MainPageComponent }];
 
 @NgModule({
-    imports: [CommonModule, RouterModule.forChild(routes), HttpClientModule],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        HttpClientModule,
+        ItemModule,
+    ],
     declarations: [MainPageComponent],
 })
 export class MainPageModule {}

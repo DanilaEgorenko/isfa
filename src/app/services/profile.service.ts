@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { IProfile } from "@app/interfaces";
-import { Observable, of } from "rxjs";
-import { map } from "rxjs/operators";
+import { BehaviorSubject, Observable, of, timer } from "rxjs";
+import { delay, finalize, map, tap } from "rxjs/operators";
 
 @Injectable()
 export class ProfileService {
+    isLoading$ = new BehaviorSubject(false);
+
     profiles$: Observable<IProfile[]> = of([
         {
             name: "Danila",
@@ -19,7 +21,10 @@ export class ProfileService {
 
     getData(id: number) {
         return this.profiles$.pipe(
-            map((data) => data.find((el) => el.id === id))
+            tap(() => this.isLoading$.next(true)),
+            map((data) => data.find((el) => el.id === id)),
+            delay(1000),
+            finalize(() => this.isLoading$.next(false))
         );
     }
 }

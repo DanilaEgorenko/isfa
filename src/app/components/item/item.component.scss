@@ -1,0 +1,57 @@
+a {
+    text-decoration: none;
+    color: var(--color-black);
+    display: inline-block;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: 5px var(--color-gray) solid;
+    border-radius: 20px;
+    padding: 5px;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 100px;
+    text-align: center;
+
+    &:hover .logo {
+        transform: scale(0.9);
+    }
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: 0.2s;
+}
+
+.name {
+    font-size: 1.2rem;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.change {
+    display: inline-flex;
+    gap: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+
+    &_green {
+        color: var(--color-green);
+    }
+
+    &_red {
+        color: var(--color-red);
+    }
+}
