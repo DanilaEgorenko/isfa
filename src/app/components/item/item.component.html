@@ -1,4 +1,4 @@
-<a class="item" (click)="goTo([item.type, item.isin])">
+<a class="item" [routerLink]="['/', item.type, item.isin]">
     <div
         class="logo"
         [ngStyle]="{

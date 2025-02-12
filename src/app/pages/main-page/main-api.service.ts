@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { IApiResponse } from "../crypto-page/interfaces";
+import { ICoinApiResponse } from "../crypto-item-page/interfaces";
 
 @Injectable({ providedIn: "root" })
 export class MainApiService {
@@ -35,6 +36,12 @@ export class MainApiService {
     getCryproByChange(orderDirection: "desc" | "asc") {
         return this.http.get<IApiResponse>(
             `https://api.coinranking.com/v2/coins?limit=10&orderBy=change&orderDirection=${orderDirection}`
+        );
+    }
+
+    getCryproById(id: string) {
+        return this.http.get<ICoinApiResponse>(
+            `https://api.coinranking.com/v2/coin/${id}`
         );
     }
 
