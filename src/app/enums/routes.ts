@@ -1,4 +1,5 @@
 export enum ERoutes {
-    MAIN = "main",
+    MAIN = "",
     PROFILE = "profile",
+    CRYPTO = "crypto",
 }

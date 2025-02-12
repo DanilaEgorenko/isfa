@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 5px var(--color-gray) solid;
+    border-radius: 20px;
+    padding: 20px;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button {
+    margin: 15px;
+    background-color: var(--color-green);
+    appearance: none;
+    border: none;
+    padding: 20px;
+    font-size: 1rem;
+    transition: 0.3s;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}

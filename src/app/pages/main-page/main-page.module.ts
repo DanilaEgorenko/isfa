@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { ItemModule } from "@app/components/item/item.module";
 
-const routes = [{ path: "", component: MainPageComponent }];
+export const routes = [{ path: "", component: MainPageComponent }];
 
 @NgModule({
     imports: [

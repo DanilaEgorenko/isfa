@@ -1,7 +1,7 @@
-import { HttpClient, HttpHandler } from "@angular/common/http";
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { MainApiService } from "./main-api.service";
 import { of } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
     selector: "app-main-page",
@@ -11,10 +11,14 @@ import { of } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent {
+    topLowest$ = this.mainApiService
+        .getCryproByChange("asc")
+        .pipe(map((res) => res.data.coins));
+    topHighest$ = this.mainApiService
+        .getCryproByChange("desc")
+        .pipe(map((res) => res.data.coins));
     constructor(private mainApiService: MainApiService) {
-        this.mainApiService.getApi().subscribe((data) => console.log(data));
-
-        this.mainApiService.getLogoCompany("RU000A0D8MM8").subscribe();
+        //this.mainApiService.getLogoCompany("RU000A0D8MM8").subscribe();
     }
 
     item$ = of({

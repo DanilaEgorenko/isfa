@@ -1,16 +1,28 @@
 <div class="container">
     <h2>Топ взлётов и падений</h2>
     <div class="content">
-        <app-item [item]="item$ | async"></app-item>
-        <app-item [item]="item$ | async"></app-item>
-        <app-item [item]="item$ | async"></app-item>
-        <app-item [item]="item$ | async"></app-item>
-        <app-item [item]="item$ | async"></app-item
-        ><app-item [item]="item$ | async"></app-item
-        ><app-item [item]="item$ | async"></app-item
-        ><app-item [item]="item$ | async"></app-item
-        ><app-item [item]="item$ | async"></app-item
-        ><app-item [item]="item$ | async"></app-item>
+        <app-item
+            *ngFor="let item of topHighest$ | async"
+            [item]="{
+                name: item.name,
+                isin: item.uuid,
+                type: 'crypto',
+                logo: item.iconUrl,
+                change: +item.change
+            }"
+        ></app-item>
+    </div>
+    <div class="content">
+        <app-item
+            *ngFor="let item of topLowest$ | async"
+            [item]="{
+                name: item.name,
+                isin: item.uuid,
+                type: 'crypto',
+                logo: item.iconUrl,
+                change: +item.change
+            }"
+        ></app-item>
     </div>
 </div>
 <div class="container">

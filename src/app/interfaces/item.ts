@@ -1,7 +1,7 @@
 export interface IItem {
     name: string;
     change?: number;
-    logo: string;
+    logo?: string;
     isin: string;
     type: string;
 }

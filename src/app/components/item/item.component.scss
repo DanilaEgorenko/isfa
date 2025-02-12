@@ -1,22 +1,21 @@
-a {
+.item {
     text-decoration: none;
     color: var(--color-black);
     display: inline-block;
-}
-
-.item {
     display: flex;
     flex-direction: column;
     gap: 5px;
     border: 5px var(--color-gray) solid;
     border-radius: 20px;
     padding: 5px;
-    margin: 10px;
+    margin: 5px;
     align-items: center;
     justify-content: center;
-    height: 120px;
+    height: 140px;
     width: 100px;
     text-align: center;
+
+    cursor: pointer;
 
     &:hover .logo {
         transform: scale(0.9);
@@ -28,7 +27,8 @@ a {
     height: 60px;
     border-radius: 20px;
 
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
 
     transition: 0.2s;
@@ -39,6 +39,9 @@ a {
     width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .change {
@@ -53,5 +56,11 @@ a {
 
     &_red {
         color: var(--color-red);
+    }
+}
+
+@media (max-width: 1024px) {
+    .name {
+        -webkit-line-clamp: 1;
     }
 }

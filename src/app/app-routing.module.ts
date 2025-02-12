@@ -4,11 +4,6 @@ import { ERoutes } from "./enums";
 
 export const routes: Routes = [
     {
-        path: "",
-        pathMatch: "full",
-        redirectTo: ERoutes.MAIN,
-    },
-    {
         path: ERoutes.MAIN,
         loadChildren: () =>
             import("./pages/main-page/main-page.module").then(
@@ -20,6 +15,13 @@ export const routes: Routes = [
         loadChildren: () =>
             import("./pages/profile-page/profile-page.module").then(
                 (m) => m.ProfilePageModule
+            ),
+    },
+    {
+        path: ERoutes.CRYPTO,
+        loadChildren: () =>
+            import("./pages/crypto-page/crypto-page.module").then(
+                (m) => m.CryptoPageModule
             ),
     },
 ];
