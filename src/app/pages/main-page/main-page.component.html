@@ -1,18 +1,19 @@
 <div class="container">
     <h2>Топ взлётов и падений</h2>
-    <div class="content">
+    <div class="content" *ngIf="topHighest$ | async as topHighest; else empty">
         <app-item
-            *ngFor="let item of topHighest$ | async"
+            *ngFor="let item of topHighest"
             [item]="{
                 name: item.name,
                 isin: item.uuid,
                 type: 'crypto',
                 logo: item.iconUrl,
-                change: +item.change
+                change: +item.change,
+                wrappedColor: true
             }"
         ></app-item>
     </div>
-    <div class="content">
+    <div class="content" *ngIf="topLowest$ | async as topLowest; else empty">
         <app-item
             *ngFor="let item of topLowest$ | async"
             [item]="{
@@ -20,7 +21,8 @@
                 isin: item.uuid,
                 type: 'crypto',
                 logo: item.iconUrl,
-                change: +item.change
+                change: +item.change,
+                wrappedColor: true
             }"
         ></app-item>
     </div>
@@ -29,3 +31,7 @@
     <h2>Подборки</h2>
     <div class="content">Пусто</div>
 </div>
+
+<ng-template #empty>
+    <p>Пусто</p>
+</ng-template>

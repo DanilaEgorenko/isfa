@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { IApiResponse } from "../crypto-page/interfaces";
 import { ICoinApiResponse } from "../crypto-item-page/interfaces";
+import { map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class MainApiService {
@@ -43,6 +44,19 @@ export class MainApiService {
         return this.http.get<ICoinApiResponse>(
             `https://api.coinranking.com/v2/coin/${id}`
         );
+    }
+
+    getCryptoSymbol(name: string) {
+        return this.http
+            .get<any>(
+                `https://api.coinranking.com/v2/search-suggestions?query=${name}`
+            )
+            .pipe(
+                map((res) => ({
+                    prefix: res?.data.markets?.[0].exchangeName,
+                    symbol: res?.data.markets?.[0].baseSymbol,
+                }))
+            );
     }
 
     getLogoCompany(ISIN: string) {

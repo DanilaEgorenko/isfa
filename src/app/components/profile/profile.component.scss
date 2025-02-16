@@ -1,11 +1,12 @@
 header {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 70px;
     position: sticky;
     top: 0;
     background-color: white;
-    z-index: 1000;
+    z-index: 100;
 }
 
 button {
@@ -31,9 +32,6 @@ button {
     height: 50px;
     background: var(--color-gray);
     border-radius: 20px;
-    position: fixed;
-    top: 10px;
-    right: 10px;
     cursor: pointer;
 
     background-image: url(https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg);

@@ -1,4 +1,8 @@
 <header>
     <button *ngIf="!(isMainPage$ | async)" (click)="back()">Назад</button>
+    <div class="data">
+        <p>Bitcoin</p>
+        <p>BTC</p>
+    </div>
     <a [routerLink]="['profile', 1]"><div class="profile"></div></a>
 </header>

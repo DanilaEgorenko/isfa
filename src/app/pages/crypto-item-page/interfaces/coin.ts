@@ -32,4 +32,6 @@ export interface ICoin {
     notices: null;
     contractAddresses: string[];
     tags: string[];
+    comments: unknown[];
+    rating: number;
 }

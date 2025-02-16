@@ -1,4 +1,10 @@
-<a class="item" [routerLink]="['/', item.type, item.isin]">
+<a
+    class="item"
+    [routerLink]="['/', item.type, item.isin]"
+    [ngClass]="
+        item.wrappedColor && (item.change >= 0 ? 'item_green' : 'item_red')
+    "
+>
     <div
         class="logo"
         [ngStyle]="{

@@ -9,7 +9,7 @@ import { IItem } from "@app/interfaces";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
-    @Input() item: IItem;
+    @Input() item: IItem & { wrappedColor?: boolean };
 
     getRotateDeg(change: number): number {
         const deg = 90 - (change / 100) * 90;

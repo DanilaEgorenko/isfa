@@ -1,3 +1,112 @@
 <ng-container *ngIf="item$ | async as item">
-    <h2>{{ item.name }}</h2>
+    <div class="top-content">
+        <div class="chart">
+            <tradingview-widget
+                [widgetConfig]="getWidgetConfig(item)"
+            ></tradingview-widget>
+        </div>
+
+        <div class="side-content">
+            <div class="container">
+                <p class="subtitle">Рыночный тренд</p>
+                <div class="content">
+                    <p
+                        title="Вырастет или упадёт"
+                        class="rating-score"
+                        [ngStyle]="{
+                            color:
+                                item?.rating >= 0
+                                    ? 'var(--color-green)'
+                                    : 'var(--color-red)'
+                        }"
+                    >
+                        {{ item?.rating }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="container">
+                <p class="subtitle">Пользовательский тренд</p>
+                <div class="content">
+                    <p
+                        title="Вырастет или упадёт"
+                        class="rating-score"
+                        [ngStyle]="{
+                            color:
+                                item?.rating >= 0
+                                    ? 'var(--color-green)'
+                                    : 'var(--color-red)'
+                        }"
+                    >
+                        {{ item?.rating }}
+                    </p>
+                    <div class="rating-buttons">
+                        <button
+                            class="rating-button add_rating"
+                            title="Вырастет"
+                        >
+                            Вверх
+                        </button>
+                        <button
+                            class="rating-button remove_rating"
+                            title="Упадёт"
+                        >
+                            Вниз
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <p class="subtitle">Цена от ИИ</p>
+                <div class="content">
+                    <button>Узнать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="block">Данные</h2>
+    <div class="content">
+        <div class="container">
+            <p class="subtitle">Капитализация</p>
+            <p>{{ formatNumber(item?.marketCap) }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Суточный объём</p>
+            <p>{{ formatNumber(item?.["24hVolume"]) }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Максимальная цена</p>
+            <p>
+                {{ roundNumber(+item?.allTimeHigh?.price) }}
+                {{ getDiffCurrPrice(item?.allTimeHigh?.price, item?.price) }}
+            </p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Цена</p>
+            <p>{{ item?.price }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Сайт</p>
+            <a [href]="item.websiteUrl" target="_blank">{{
+                item.websiteUrl
+            }}</a>
+        </div>
+        <div class="container">
+            <p class="subtitle">Описание</p>
+            <p>{{ item?.description }}</p>
+        </div>
+    </div>
+
+    <h2 class="block">Комментарии</h2>
+    <form>
+        <textarea
+            placeholder="Напишите комментарий"
+            cols="60"
+            rows="5"
+        ></textarea>
+        <button>Отправить</button>
+    </form>
+    <div *ngIf="item?.comments?.length" class="comments"></div>
 </ng-container>
