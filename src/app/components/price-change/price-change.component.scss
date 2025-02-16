@@ -1,0 +1,14 @@
+.change {
+    display: inline-flex;
+    gap: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+
+    &_green {
+        color: var(--color-green);
+    }
+
+    &_red {
+        color: var(--color-red);
+    }
+}

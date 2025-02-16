@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { MainApiService } from "../main-page/main-api.service";
-import { first, map, takeUntil, throttle, throttleTime } from "rxjs/operators";
-import { BehaviorSubject, combineLatest, forkJoin } from "rxjs";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { DestroyService } from "@app/services/destroy.service";
+import { BehaviorSubject, combineLatest } from "rxjs";
+import { first, map, takeUntil, throttleTime } from "rxjs/operators";
+import { MainApiService } from "../main-page/main-api.service";
 
 @Component({
     selector: "app-crypto-page",

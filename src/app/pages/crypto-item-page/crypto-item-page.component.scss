@@ -62,8 +62,8 @@ button {
     }
 }
 
-.rating {
-    &-score {
+.market {
+    &-trand {
         font-size: 2rem;
     }
 
@@ -78,6 +78,38 @@ button {
         appearance: none;
         border: none;
         cursor: pointer;
+    }
+}
+
+.user-rating-score {
+    display: block;
+    height: 30px;
+    width: 100%;
+    background-color: var(--color-gray);
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.generating-price {
+    background: radial-gradient(
+            #ff5c4d 0.69%,
+            #eb469f 25.52%,
+            #8341ef 72.19%,
+            #3f68f9 100%
+        )
+        border-box;
+    background-size: 200% 200%;
+    animation: rotate 3s linear infinite;
+    color: var(--color-black);
+    cursor: wait;
+}
+
+@keyframes rotate {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
     }
 }
 

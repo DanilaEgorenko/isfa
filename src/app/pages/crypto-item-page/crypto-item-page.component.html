@@ -12,15 +12,12 @@
                 <div class="content">
                     <p
                         title="Вырастет или упадёт"
-                        class="rating-score"
+                        class="market-trand"
                         [ngStyle]="{
-                            color:
-                                item?.rating >= 0
-                                    ? 'var(--color-green)'
-                                    : 'var(--color-red)'
+                            color: getMarketTrand(item?.sparkline).color
                         }"
                     >
-                        {{ item?.rating }}
+                        {{ getMarketTrand(item?.sparkline).title }}
                     </p>
                 </div>
             </div>
@@ -28,18 +25,7 @@
             <div class="container">
                 <p class="subtitle">Пользовательский тренд</p>
                 <div class="content">
-                    <p
-                        title="Вырастет или упадёт"
-                        class="rating-score"
-                        [ngStyle]="{
-                            color:
-                                item?.rating >= 0
-                                    ? 'var(--color-green)'
-                                    : 'var(--color-red)'
-                        }"
-                    >
-                        {{ item?.rating }}
-                    </p>
+                    <div class="user-rating-score"></div>
                     <div class="rating-buttons">
                         <button
                             class="rating-button add_rating"
@@ -60,7 +46,19 @@
             <div class="container">
                 <p class="subtitle">Цена от ИИ</p>
                 <div class="content">
-                    <button>Узнать</button>
+                    <button
+                        [disabled]="isGeneratingPrice$ | async"
+                        (click)="generatePrice(item.name)"
+                        [ngClass]="{
+                            'generating-price': isGeneratingPrice$ | async
+                        }"
+                    >
+                        {{
+                            (isGeneratingPrice$ | async)
+                                ? "Узнаём..."
+                                : "Узнать"
+                        }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -85,7 +83,7 @@
         </div>
         <div class="container">
             <p class="subtitle">Цена</p>
-            <p>{{ item?.price }}</p>
+            <p>{{ roundNumber(+item?.price) }}</p>
         </div>
         <div class="container">
             <p class="subtitle">Сайт</p>

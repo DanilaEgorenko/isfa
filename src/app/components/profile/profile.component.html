@@ -1,8 +1,11 @@
-<header>
+<header [ngStyle]="{ 'background-color': (data$ | async)?.color }">
     <button *ngIf="!(isMainPage$ | async)" (click)="back()">Назад</button>
-    <div class="data">
-        <p>Bitcoin</p>
-        <p>BTC</p>
+    <div *ngIf="data$ | async as data" class="data">
+        <p>{{ data?.name }}</p>
+        <p class="symbol">{{ data?.symbol }}</p>
+        <app-price-change [change]="data.change"></app-price-change>
     </div>
-    <a [routerLink]="['profile', 1]"><div class="profile"></div></a>
+    <a class="profile-link" [routerLink]="['profile', 1]"
+        ><div class="profile-pic"></div
+    ></a>
 </header>

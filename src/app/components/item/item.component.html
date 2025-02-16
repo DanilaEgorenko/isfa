@@ -13,18 +13,5 @@
         }"
     ></div>
     <p class="name">{{ item.name }}</p>
-    <div
-        *ngIf="item.change"
-        class="change"
-        [ngClass]="item.change >= 0 ? 'change_green' : 'change_red'"
-    >
-        <div
-            [ngStyle]="{
-                transform: 'rotate(' + getRotateDeg(item.change) + 'deg)'
-            }"
-        >
-            ↑
-        </div>
-        <p>{{ item.change }}%</p>
-    </div>
+    <app-price-change [change]="item.change"></app-price-change>
 </a>

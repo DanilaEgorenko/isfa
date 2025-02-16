@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { Location } from "@angular/common";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { ERoutes } from "@app/enums";
-import { BehaviorSubject } from "rxjs";
-import { take, takeLast, takeUntil } from "rxjs/operators";
+import { HeaderDataService } from "@app/services";
 import { DestroyService } from "@app/services/destroy.service";
+import { BehaviorSubject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
     selector: "app-profile",
@@ -15,8 +16,10 @@ import { DestroyService } from "@app/services/destroy.service";
 })
 export class ProfileComponent {
     isMainPage$ = new BehaviorSubject<boolean>(false);
+    data$ = this.headerDataService.data$;
 
     constructor(
+        private headerDataService: HeaderDataService,
         private location: Location,
         private router: Router,
         private destroy$: DestroyService

@@ -1,0 +1,14 @@
+<div
+    *ngIf="change"
+    class="change"
+    [ngClass]="change >= 0 ? 'change_green' : 'change_red'"
+>
+    <div
+        [ngStyle]="{
+            transform: 'rotate(' + getRotateDeg(change) + 'deg)'
+        }"
+    >
+        ↑
+    </div>
+    <p>{{ change }}%</p>
+</div>
