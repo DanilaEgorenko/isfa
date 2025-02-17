@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { MainApiService } from "./main-api.service";
-import { of } from "rxjs";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { CollectionService } from "@app/services";
 import { map } from "rxjs/operators";
+import { MainApiService } from "./main-api.service";
 
 @Component({
     selector: "app-main-page",
@@ -14,17 +14,17 @@ export class MainPageComponent {
     topLowest$ = this.mainApiService
         .getCryproByChange("asc")
         .pipe(map((res) => res.data.coins));
+
     topHighest$ = this.mainApiService
         .getCryproByChange("desc")
         .pipe(map((res) => res.data.coins));
-    constructor(private mainApiService: MainApiService) {
+
+    collections$ = this.collectionService.getCollections();
+
+    constructor(
+        private mainApiService: MainApiService,
+        private collectionService: CollectionService
+    ) {
         //this.mainApiService.getLogoCompany("RU000A0D8MM8").subscribe();
     }
-
-    item$ = of({
-        name: "SBER",
-        change: 15,
-        isin: "RU0009029540",
-        type: "stocks",
-    });
 }

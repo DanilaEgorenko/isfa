@@ -22,26 +22,7 @@
                 </div>
             </div>
 
-            <div class="container">
-                <p class="subtitle">Пользовательский тренд</p>
-                <div class="content">
-                    <div class="user-rating-score"></div>
-                    <div class="rating-buttons">
-                        <button
-                            class="rating-button add_rating"
-                            title="Вырастет"
-                        >
-                            Вверх
-                        </button>
-                        <button
-                            class="rating-button remove_rating"
-                            title="Упадёт"
-                        >
-                            Вниз
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <app-user-rating></app-user-rating>
 
             <div class="container">
                 <p class="subtitle">Цена от ИИ</p>
@@ -93,7 +74,7 @@
         </div>
         <div class="container">
             <p class="subtitle">Описание</p>
-            <p>{{ item?.description }}</p>
+            <!-- <p>{{ translate(item?.description) | async }}</p> -->
         </div>
     </div>
 

@@ -18,6 +18,13 @@ export const routes: Routes = [
             ),
     },
     {
+        path: ERoutes.COLLECTION,
+        loadChildren: () =>
+            import("./pages/collection-page/collection-page.module").then(
+                (m) => m.CollectionPageModule
+            ),
+    },
+    {
         path: ERoutes.CRYPTO,
         loadChildren: () =>
             import("./pages/crypto-page/crypto-page.module").then(

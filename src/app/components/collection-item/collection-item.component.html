@@ -1,0 +1,10 @@
+<a class="collection" [routerLink]="['/collection', collection.id]">
+    <div
+        class="logo"
+        [ngStyle]="{
+            'background-image': 'url(' + collection.pic + ')'
+        }"
+    ></div>
+    <p class="name">{{ collection.name }}</p>
+    <p class="short_description">{{ collection.short_description }}</p>
+</a>

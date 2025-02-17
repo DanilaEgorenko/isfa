@@ -81,15 +81,6 @@ button {
     }
 }
 
-.user-rating-score {
-    display: block;
-    height: 30px;
-    width: 100%;
-    background-color: var(--color-gray);
-    border-radius: 20px;
-    margin-top: 10px;
-}
-
 .generating-price {
     background: radial-gradient(
             #ff5c4d 0.69%,
@@ -111,14 +102,6 @@ button {
     100% {
         background-position: 100% 100%;
     }
-}
-
-.add_rating {
-    background-color: var(--color-green);
-}
-
-.remove_rating {
-    background-color: var(--color-red);
 }
 
 @media (max-width: 768px) {

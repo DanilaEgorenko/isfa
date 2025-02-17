@@ -1,4 +1,4 @@
-<div class="container">
+<div class="wrapper">
     <h2>Топ взлётов и падений</h2>
     <div class="content" *ngIf="topHighest$ | async as topHighest; else empty">
         <app-item
@@ -15,7 +15,7 @@
     </div>
     <div class="content" *ngIf="topLowest$ | async as topLowest; else empty">
         <app-item
-            *ngFor="let item of topLowest$ | async"
+            *ngFor="let item of topLowest"
             [item]="{
                 name: item.name,
                 isin: item.uuid,
@@ -27,9 +27,15 @@
         ></app-item>
     </div>
 </div>
-<div class="container">
+<div class="wrapper">
     <h2>Подборки</h2>
-    <div class="content">Пусто</div>
+    <div class="content">
+        <ng-container *ngIf="collections$ | async as collections; else empty">
+            <ng-container *ngFor="let item of collections">
+                <app-collection-item [collection]="item"></app-collection-item>
+            </ng-container>
+        </ng-container>
+    </div>
 </div>
 
 <ng-template #empty>

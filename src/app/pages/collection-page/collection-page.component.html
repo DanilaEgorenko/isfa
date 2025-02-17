@@ -1,0 +1,27 @@
+<div class="collection-page" *ngIf="collection$ | async as collection">
+    <p>{{ collection?.short_description }}</p>
+    <div
+        class="logo"
+        [ngStyle]="{
+            'background-image': 'url(' + collection.pic + ')'
+        }"
+    ></div>
+    <p>{{ collection?.description }}</p>
+
+    <div class="wrapper">
+        <div class="content">
+            <app-item
+                *ngFor="let item of collection.items"
+                [item]="{
+                    name: item.name,
+                    isin: item.uuid,
+                    type: 'crypto',
+                    logo: item.iconUrl,
+                    change: +item.change
+                }"
+            ></app-item>
+        </div>
+
+        <app-user-rating class="user-rating"></app-user-rating>
+    </div>
+</div>

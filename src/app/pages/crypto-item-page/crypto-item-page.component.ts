@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HeaderDataService } from "@app/services";
+import { TranslateService } from "@app/services/translate.service";
 import { ITradingViewWidget } from "angular-tradingview-widget";
 import { BehaviorSubject } from "rxjs";
 import { map, tap } from "rxjs/operators";
@@ -31,14 +32,18 @@ export class CryptoItemPageComponent implements OnDestroy {
     constructor(
         private mainApiService: MainApiService,
         private headerDataService: HeaderDataService,
+        private translateService: TranslateService,
         private route: ActivatedRoute
-    ) {}
+    ) {
+        this.mainApiService.getCryptoHistory().subscribe();
+    }
 
     ngOnDestroy(): void {
         this.headerDataService.updateData(null);
     }
 
     getWidgetConfig(item: ICoin): ITradingViewWidget {
+        // debugger;
         return {
             symbol: `BINANCE:${item.symbol}USD`,
             widgetType: "widget",
@@ -102,4 +107,10 @@ export class CryptoItemPageComponent implements OnDestroy {
         this.isGeneratingPriceSubject.next(true);
         setTimeout(() => this.isGeneratingPriceSubject.next(false), 3000);
     }
+
+    // translate(text: string): Observable<string> {
+    //     if (!text) return;
+
+    //     return this.translateService.translate(text);
+    // }
 }

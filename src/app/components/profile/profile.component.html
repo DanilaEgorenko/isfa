@@ -1,7 +1,7 @@
 <header [ngStyle]="{ 'background-color': (data$ | async)?.color }">
     <button *ngIf="!(isMainPage$ | async)" (click)="back()">Назад</button>
     <div *ngIf="data$ | async as data" class="data">
-        <p>{{ data?.name }}</p>
+        <h1>{{ data?.name }}</h1>
         <p class="symbol">{{ data?.symbol }}</p>
         <app-price-change [change]="data.change"></app-price-change>
     </div>

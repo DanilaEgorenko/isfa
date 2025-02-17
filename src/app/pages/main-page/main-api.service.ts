@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IApiResponse } from "../crypto-page/interfaces";
-import { ICoinApiResponse } from "../crypto-item-page/interfaces";
 import { map } from "rxjs/operators";
+import { ICoinApiResponse } from "../crypto-item-page/interfaces";
+import { IApiResponse } from "../crypto-page/interfaces";
 
 @Injectable({ providedIn: "root" })
 export class MainApiService {
@@ -31,6 +31,12 @@ export class MainApiService {
             `https://api.coinranking.com/v2/coins?limit=40&offset=${
                 params?.offset ?? 0
             }`
+        );
+    }
+
+    getCryptoHistory() {
+        return this.http.get(
+            "https://api.coinranking.com/v2/coin/Qwsogvtv82FCd/history"
         );
     }
 
