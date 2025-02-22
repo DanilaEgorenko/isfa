@@ -2,8 +2,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { ChartModule } from "@app/components/chart/chart.module";
 import { UserRatingModule } from "@app/components/user-rating/user-rating.module";
-import { TradingviewWidgetModule } from "angular-tradingview-widget";
 import { CryptoItemPageComponent } from "./crypto-item-page.component";
 
 const routes = [{ path: "", component: CryptoItemPageComponent }];
@@ -12,9 +12,9 @@ const routes = [{ path: "", component: CryptoItemPageComponent }];
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        TradingviewWidgetModule,
         FormsModule,
         UserRatingModule,
+        ChartModule,
     ],
     declarations: [CryptoItemPageComponent],
 })

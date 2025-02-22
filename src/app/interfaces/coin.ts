@@ -6,7 +6,7 @@ export interface ICoin {
     uuid: string;
     symbol: string;
     name: string;
-    description: string;
+    description: string | null;
     color: string;
     iconUrl: string;
     websiteUrl: string;

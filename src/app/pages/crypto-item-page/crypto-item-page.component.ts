@@ -2,12 +2,10 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HeaderDataService } from "@app/services";
 import { TranslateService } from "@app/services/translate.service";
-import { ITradingViewWidget } from "angular-tradingview-widget";
 import { BehaviorSubject } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { MainApiService } from "../main-page/main-api.service";
 import { MARKET_TRAND_CONST } from "./constants";
-import { ICoin } from "./interfaces";
 
 @Component({
     selector: "app-crypto-item-page",
@@ -40,16 +38,6 @@ export class CryptoItemPageComponent implements OnDestroy {
 
     ngOnDestroy(): void {
         this.headerDataService.updateData(null);
-    }
-
-    getWidgetConfig(item: ICoin): ITradingViewWidget {
-        return {
-            symbol: `BINANCE:${item.symbol}USD`,
-            widgetType: "widget",
-            locale: "ru",
-            timezone: "UTC-3",
-            // autosize: true,
-        };
     }
 
     formatNumber(num: string): string {

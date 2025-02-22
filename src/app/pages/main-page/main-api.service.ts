@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ICoinApiResponse } from "@app/interfaces";
 import { map } from "rxjs/operators";
-import { ICoinApiResponse } from "../crypto-item-page/interfaces";
 import { IApiResponse } from "../crypto-page/interfaces";
 
 @Injectable({ providedIn: "root" })
