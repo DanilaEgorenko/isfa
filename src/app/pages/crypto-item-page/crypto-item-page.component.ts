@@ -43,7 +43,6 @@ export class CryptoItemPageComponent implements OnDestroy {
     }
 
     getWidgetConfig(item: ICoin): ITradingViewWidget {
-        // debugger;
         return {
             symbol: `BINANCE:${item.symbol}USD`,
             widgetType: "widget",

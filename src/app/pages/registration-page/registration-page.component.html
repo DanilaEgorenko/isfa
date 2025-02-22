@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Вход</h2>
+    <form class="content" [formGroup]="formGroup">
+        <input formControlName="email" type="email" placeholder="Почта" />
+        <input
+            formControlName="password"
+            type="password"
+            placeholder="Пароль"
+            minlength="8"
+            maxlength="20"
+        />
+        <input
+            formControlName="name"
+            type="text"
+            placeholder="Имя"
+            minlength="2"
+            maxlength="20"
+        />
+        <button type="submit" (click)="registration()">
+            Зарегистрироваться
+        </button>
+        <a [routerLink]="['/login']">Войти</a>
+    </form>
+</div>

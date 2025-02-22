@@ -11,6 +11,20 @@ export const routes: Routes = [
             ),
     },
     {
+        path: ERoutes.LOGIN,
+        loadChildren: () =>
+            import("./pages/login-page/login-page.module").then(
+                (m) => m.LoginPageModule
+            ),
+    },
+    {
+        path: ERoutes.REGISTRATION,
+        loadChildren: () =>
+            import("./pages/registration-page/registration-page.module").then(
+                (m) => m.RegistationPageModule
+            ),
+    },
+    {
         path: ERoutes.PROFILE,
         loadChildren: () =>
             import("./pages/profile-page/profile-page.module").then(
