@@ -30,19 +30,14 @@
             <div class="container">
                 <p class="subtitle">Цена от ИИ</p>
                 <div class="content">
-                    <button
-                        [disabled]="isGeneratingPrice$ | async"
-                        (click)="generatePrice(item.coin.name)"
-                        [ngClass]="{
-                            'generating-price': isGeneratingPrice$ | async
-                        }"
+                    <ng-container
+                        *ngIf="
+                            generatedPrice$ | async as price;
+                            else generateBtn
+                        "
                     >
-                        {{
-                            (isGeneratingPrice$ | async)
-                                ? "Узнаём..."
-                                : "Узнать"
-                        }}
-                    </button>
+                        {{ price }}
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -97,4 +92,18 @@
         <button>Отправить</button>
     </form>
     <div *ngIf="item?.comments?.length" class="comments"></div>
+
+    <ng-template #generateBtn>
+        <button
+            [disabled]="isGeneratingPrice$ | async"
+            (click)="
+                generatePrice(item.coin.allTimeHigh.price, item.coin.price)
+            "
+            [ngClass]="{
+                'generating-price': isGeneratingPrice$ | async
+            }"
+        >
+            {{ (isGeneratingPrice$ | async) ? "Узнаём..." : "Узнать" }}
+        </button>
+    </ng-template>
 </ng-container>

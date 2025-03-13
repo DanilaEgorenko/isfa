@@ -18,6 +18,8 @@ export class CryptoItemPageComponent implements OnDestroy {
 
     isGeneratingPriceSubject = new BehaviorSubject(false);
     isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
+    generatedPriceSubject = new BehaviorSubject(null);
+    generatedPrice$ = this.generatedPriceSubject.asObservable();
 
     item$ = this.cryptoApiService.getCryproById(this.id).pipe(
         map((res) => res.data),
@@ -67,9 +69,14 @@ export class CryptoItemPageComponent implements OnDestroy {
         return `(${-Math.round(100 - formula)}%)`;
     }
 
-    generatePrice(name: string) {
+    generatePrice(highPrice: string, price: string) {
         this.isGeneratingPriceSubject.next(true);
-        setTimeout(() => this.isGeneratingPriceSubject.next(false), 3000);
+        setTimeout(() => {
+            this.isGeneratingPriceSubject.next(false);
+            this.generatedPriceSubject.next(
+                this.roundNumber(Math.random() * (+highPrice - +price) + +price)
+            );
+        }, 3000);
     }
 
     // translate(text: string): Observable<string> {
