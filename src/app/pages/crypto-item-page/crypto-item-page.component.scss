@@ -91,7 +91,7 @@ button {
         border-box;
     background-size: 200% 200%;
     animation: rotate 3s linear infinite;
-    color: var(--color-black);
+    color: white;
     cursor: wait;
 }
 
@@ -99,8 +99,11 @@ button {
     0% {
         background-position: 0% 0%;
     }
-    100% {
+    50% {
         background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
     }
 }
 

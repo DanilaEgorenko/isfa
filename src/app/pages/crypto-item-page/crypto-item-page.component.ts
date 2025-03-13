@@ -76,7 +76,7 @@ export class CryptoItemPageComponent implements OnDestroy {
             this.generatedPriceSubject.next(
                 this.roundNumber(Math.random() * (+highPrice - +price) + +price)
             );
-        }, 3000);
+        }, 5000);
     }
 
     // translate(text: string): Observable<string> {
