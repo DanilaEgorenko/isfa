@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { DEFAULT_PIC } from "@app/constants";
 import { ERoutes } from "@app/enums";
 import { HeaderDataService } from "@app/services";
 import { AuthService } from "@app/services/auth.service";
@@ -15,11 +16,14 @@ import { takeUntil } from "rxjs/operators";
     providers: [DestroyService, AuthService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+    readonly DEFAULT_PIC = DEFAULT_PIC;
+
     isMainPage$ = new BehaviorSubject<boolean>(false);
     isLoginPage$ = new BehaviorSubject<boolean>(false);
     data$ = this.headerDataService.data$;
-    isLogin$ = this.authService.isLogin$;
+
+    userData$ = this.authService.userDataSubject$.asObservable();
 
     constructor(
         private headerDataService: HeaderDataService,
@@ -35,6 +39,10 @@ export class ProfileComponent {
                     this.router.url === `/${ERoutes.REGISTRATION}`
             );
         });
+    }
+
+    ngOnInit(): void {
+        this.authService.loadUserData();
     }
 
     back(): void {

@@ -1,15 +1,41 @@
 <div class="container">
     <p class="subtitle">Пользовательский тренд</p>
-    <div *ngIf="isLogin$ | async; else needLogin" class="content">
+    <div *ngIf="userData$ | async; else needLogin" class="content">
         <div class="user-rating-score">
-            <div class="user-rating-score_green" [style.width.%]="60"></div>
-            <div class="user-rating-score_red" [style.width.%]="40"></div>
+            <ng-container
+                *ngIf="human_trand.up || human_trand.down; else empty"
+            >
+                <div
+                    *ngIf="getPercentages(human_trand.up) as perc"
+                    class="user-rating-score_green"
+                    [style.width.%]="perc"
+                >
+                    {{ human_trand.up }}
+                </div>
+                <div
+                    *ngIf="getPercentages(human_trand.down) as perc"
+                    class="user-rating-score_red"
+                    [style.width.%]="perc"
+                >
+                    {{ human_trand.down }}
+                </div>
+            </ng-container>
         </div>
         <div class="rating-buttons">
-            <button class="rating-button add_rating" title="Вырастет">
+            <button
+                *ngIf="userAction === 'none' || userAction === 'down'"
+                class="rating-button add_rating"
+                title="Вырастет"
+                (click)="vote('up')"
+            >
                 Вверх
             </button>
-            <button class="rating-button remove_rating" title="Упадёт">
+            <button
+                *ngIf="userAction === 'none' || userAction === 'up'"
+                class="rating-button remove_rating"
+                title="Упадёт"
+                (click)="vote('down')"
+            >
                 Вниз
             </button>
         </div>
@@ -21,3 +47,5 @@
         Необходимо <a [routerLink]="['/login']">войти</a> в аккаут =(
     </p></ng-template
 >
+
+<ng-template #empty> Оставьте голос первым </ng-template>

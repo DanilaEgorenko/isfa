@@ -6,10 +6,15 @@
         <app-price-change [change]="data.change"></app-price-change>
     </div>
     <a
-        *ngIf="isLogin$ | async; else login"
+        *ngIf="userData$ | async as user; else login"
         class="profile-link"
-        [routerLink]="['profile', 1]"
-        ><div class="profile-pic"></div
+        [routerLink]="['profile', user.user_id]"
+        ><div
+            class="profile-pic"
+            [ngStyle]="{
+                'background-image': 'url(' + (user?.pic || DEFAULT_PIC) + ')'
+            }"
+        ></div
     ></a>
 </header>
 

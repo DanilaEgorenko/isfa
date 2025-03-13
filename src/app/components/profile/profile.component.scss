@@ -21,6 +21,7 @@ button {
     font-size: 1rem;
     transition: 0.3s;
     border-radius: 20px;
+    cursor: pointer;
 
     &:hover {
         transform: scale(1.2);
@@ -44,7 +45,6 @@ button {
 .profile-link {
     margin-left: auto;
     margin-right: 10px;
-    padding: 10px;
     background: white;
     border-radius: 20px;
     color: black;
@@ -59,7 +59,6 @@ button {
     border-radius: 20px;
     cursor: pointer;
 
-    background-image: url(https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg);
     background-position: center;
     background-size: contain;
 

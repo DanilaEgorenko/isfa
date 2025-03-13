@@ -1,29 +1,19 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IProfile } from "@app/interfaces";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { delay, finalize, map, tap } from "rxjs/operators";
+import { BehaviorSubject, Observable } from "rxjs";
+import { finalize, tap } from "rxjs/operators";
 
 @Injectable()
 export class ProfileService {
+    private apiUrl = "http://127.0.0.1:8000/api";
+
     isLoading$ = new BehaviorSubject(false);
 
-    profiles$: Observable<IProfile[]> = of([
-        {
-            name: "Danila",
-            pic: "https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg",
-            status: "Главный тут",
-            rating: 0,
-            id: 1,
-            favorites: [],
-            trand_activities: [],
-        },
-    ]);
+    constructor(private http: HttpClient) {}
 
-    getData(id: number) {
-        return this.profiles$.pipe(
+    getData(id: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/user/${id}/`).pipe(
             tap(() => this.isLoading$.next(true)),
-            map((data) => data.find((el) => el.id === id)),
-            delay(500),
             finalize(() => this.isLoading$.next(false))
         );
     }

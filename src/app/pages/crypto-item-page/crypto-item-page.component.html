@@ -1,6 +1,6 @@
 <ng-container *ngIf="item$ | async as item">
     <div class="top-content">
-        <app-chart [item]="item"></app-chart>
+        <app-chart [item]="item.coin"></app-chart>
 
         <div class="side-content">
             <div class="container">
@@ -10,22 +10,29 @@
                         title="Вырастет или упадёт"
                         class="market-trand"
                         [ngStyle]="{
-                            color: getMarketTrand(item?.sparkline).color
+                            color: MARKET_TRAND_CONST[item?.retail_trand].color
                         }"
                     >
-                        {{ getMarketTrand(item?.sparkline).title }}
+                        {{ MARKET_TRAND_CONST[item?.retail_trand].title }}
                     </p>
                 </div>
             </div>
 
-            <app-user-rating></app-user-rating>
+            <app-user-rating
+                [human_trand]="{
+                    up: item.human_trand_up,
+                    down: item.human_trand_down
+                }"
+                [userAction]="item.user_action"
+                [id]="item.coin.uuid"
+            ></app-user-rating>
 
             <div class="container">
                 <p class="subtitle">Цена от ИИ</p>
                 <div class="content">
                     <button
                         [disabled]="isGeneratingPrice$ | async"
-                        (click)="generatePrice(item.name)"
+                        (click)="generatePrice(item.coin.name)"
                         [ngClass]="{
                             'generating-price': isGeneratingPrice$ | async
                         }"
@@ -45,32 +52,37 @@
     <div class="content">
         <div class="container">
             <p class="subtitle">Капитализация</p>
-            <p>{{ formatNumber(item?.marketCap) }}</p>
+            <p>{{ formatNumber(item?.coin.marketCap) }}</p>
         </div>
         <div class="container">
             <p class="subtitle">Суточный объём</p>
-            <p>{{ formatNumber(item?.["24hVolume"]) }}</p>
+            <p>{{ formatNumber(item.coin?.["24hVolume"]) }}</p>
         </div>
         <div class="container">
             <p class="subtitle">Максимальная цена</p>
             <p>
-                {{ roundNumber(+item?.allTimeHigh?.price) }}
-                {{ getDiffCurrPrice(item?.allTimeHigh?.price, item?.price) }}
+                {{ roundNumber(+item?.coin.allTimeHigh?.price) }}
+                {{
+                    getDiffCurrPrice(
+                        item?.coin.allTimeHigh?.price,
+                        item?.coin.price
+                    )
+                }}
             </p>
         </div>
         <div class="container">
             <p class="subtitle">Цена</p>
-            <p>{{ roundNumber(+item?.price) }}</p>
+            <p>{{ roundNumber(+item?.coin.price) }}</p>
         </div>
         <div class="container">
             <p class="subtitle">Сайт</p>
-            <a [href]="item.websiteUrl" target="_blank">{{
-                item.websiteUrl
+            <a [href]="item.coin.websiteUrl" target="_blank">{{
+                item.coin.websiteUrl
             }}</a>
         </div>
-        <div class="container" *ngIf="item?.description">
+        <div class="container" *ngIf="item?.coin.description">
             <p class="subtitle">Описание</p>
-            <p>{{ item?.description }}</p>
+            <p>{{ item?.coin.description }}</p>
             <!-- <p>{{ translate(item?.description) | async }}</p> -->
         </div>
     </div>

@@ -1,11 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ICoinApiResponse } from "@app/interfaces";
-import { map } from "rxjs/operators";
-import { IApiResponse } from "../crypto-page/interfaces";
 
 @Injectable({ providedIn: "root" })
 export class MainApiService {
+    private readonly apiUrl = "http://127.0.0.1:8000/api/";
+
     constructor(private http: HttpClient) {}
 
     getApi() {
@@ -24,45 +23,6 @@ export class MainApiService {
         //         },
         //     }
         // );
-    }
-
-    getCrypro(params?: { offset: number }) {
-        return this.http.get<IApiResponse>(
-            `https://api.coinranking.com/v2/coins?limit=40&offset=${
-                params?.offset ?? 0
-            }`
-        );
-    }
-
-    getCryptoHistory() {
-        return this.http.get(
-            "https://api.coinranking.com/v2/coin/Qwsogvtv82FCd/history"
-        );
-    }
-
-    getCryproByChange(orderDirection: "desc" | "asc") {
-        return this.http.get<IApiResponse>(
-            `https://api.coinranking.com/v2/coins?limit=10&orderBy=change&orderDirection=${orderDirection}`
-        );
-    }
-
-    getCryproById(id: string) {
-        return this.http.get<ICoinApiResponse>(
-            `https://api.coinranking.com/v2/coin/${id}`
-        );
-    }
-
-    getCryptoSymbol(name: string) {
-        return this.http
-            .get<any>(
-                `https://api.coinranking.com/v2/search-suggestions?query=${name}`
-            )
-            .pipe(
-                map((res) => ({
-                    prefix: res?.data.markets?.[0].exchangeName,
-                    symbol: res?.data.markets?.[0].baseSymbol,
-                }))
-            );
     }
 
     getLogoCompany(ISIN: string) {

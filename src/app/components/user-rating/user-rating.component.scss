@@ -6,15 +6,23 @@
     border-radius: 20px;
     margin-top: 10px;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
 
     &_green {
         background-color: var(--color-green);
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &_red {
         background-color: var(--color-red);
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

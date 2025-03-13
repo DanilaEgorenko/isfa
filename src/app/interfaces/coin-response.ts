@@ -1,8 +1,15 @@
+import { EMarketTrand } from "@app/pages/crypto-item-page/enums";
 import { ICoin } from "./coin";
+import { UserAction } from "@app/components/user-rating/user-rating.component";
 
 export interface ICoinApiResponse {
     status: string;
     data: {
         coin: ICoin;
+        retail_trand: EMarketTrand;
+        human_trand_up: number;
+        human_trand_down: number;
+        user_action: UserAction;
+        comments: any[];
     };
 }

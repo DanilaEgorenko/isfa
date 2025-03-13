@@ -4,30 +4,38 @@
     <div class="profile-header">
         <div
             class="image"
-            [ngStyle]="{ 'background-image': 'url(' + profileInfo.pic + ')' }"
+            [ngStyle]="{
+                'background-image':
+                    'url(' + (profileInfo?.pic || DEFAULT_PIC) + ')'
+            }"
         ></div>
         <div class="container name-status">
             <h2 class="name">{{ profileInfo.name }}</h2>
-            <p *ngIf="profileInfo.status" class="status">
-                {{ profileInfo.status }}
+            <p *ngIf="profileInfo?.status" class="status">
+                {{ profileInfo?.status }}
             </p>
         </div>
 
-        <div class="container">
+        <div
+            class="container"
+            [ngClass]="
+                profileInfo?.rating >= 0 ? 'container_green' : 'container_red'
+            "
+        >
             <h2>Рейтинг</h2>
             <p
                 title="Насколько профиль любим пользователями"
                 class="rating-score"
                 [ngStyle]="{
                     color:
-                        profileInfo.rating >= 0
+                        profileInfo?.rating >= 0
                             ? 'var(--color-green)'
                             : 'var(--color-red)'
                 }"
             >
                 {{ profileInfo.rating }}
             </p>
-            <div class="rating-buttons">
+            <div *ngIf="!(isMineProdile$ | async)" class="rating-buttons">
                 <button class="rating-button add_rating" title="Добавить">
                     +
                 </button>
@@ -41,7 +49,7 @@
     <div class="wrapper">
         <div class="container favorites">
             <h2>Избранное</h2>
-            <div *ngIf="profileInfo.favorites.length; else empty"></div>
+            <div *ngIf="profileInfo?.favorites.length; else empty"></div>
         </div>
 
         <div class="container virtual-portfolio">
@@ -49,6 +57,10 @@
             <div *ngIf="profileInfo?.virtual_portfolio; else empty"></div>
         </div>
     </div>
+
+    <button *ngIf="isMineProdile$ | async" class="logout" (click)="logout()">
+        Выйти из аккаунта
+    </button>
 </ng-container>
 
 <ng-template #empty>

@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { HeaderDataService } from "@app/services";
+import { CryptoApiService, HeaderDataService } from "@app/services";
 import { TranslateService } from "@app/services/translate.service";
 import { BehaviorSubject } from "rxjs";
 import { map, tap } from "rxjs/operators";
-import { MainApiService } from "../main-page/main-api.service";
 import { MARKET_TRAND_CONST } from "./constants";
 
 @Component({
@@ -20,20 +19,25 @@ export class CryptoItemPageComponent implements OnDestroy {
     isGeneratingPriceSubject = new BehaviorSubject(false);
     isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
 
-    item$ = this.mainApiService.getCryproById(this.id).pipe(
-        map((res) => res.data.coin),
-        tap(({ name, symbol, change, color }) =>
-            this.headerDataService.updateData({ name, symbol, change, color })
+    item$ = this.cryptoApiService.getCryproById(this.id).pipe(
+        map((res) => res.data),
+        tap(({ coin }) =>
+            this.headerDataService.updateData({
+                name: coin.name,
+                symbol: coin.symbol,
+                change: coin.change,
+                color: coin.color,
+            })
         )
     );
 
     constructor(
-        private mainApiService: MainApiService,
+        private cryptoApiService: CryptoApiService,
         private headerDataService: HeaderDataService,
         private translateService: TranslateService,
         private route: ActivatedRoute
     ) {
-        this.mainApiService.getCryptoHistory().subscribe();
+        this.cryptoApiService.getCryptoHistory().subscribe();
     }
 
     ngOnDestroy(): void {
@@ -61,33 +65,6 @@ export class CryptoItemPageComponent implements OnDestroy {
     getDiffCurrPrice(highPrice: string, currPrice: string): string {
         const formula = +currPrice / (+highPrice / 100);
         return `(${-Math.round(100 - formula)}%)`;
-    }
-
-    getMarketTrand(lines: (string | null)[], window = 6) {
-        const prices = lines.filter(Boolean).map(Number);
-
-        if (prices.length < window) {
-            return MARKET_TRAND_CONST.UNKNOWN;
-        }
-
-        const sma = [];
-        for (let i = window - 1; i < prices.length; i++) {
-            const sum = prices
-                .slice(i - window + 1, i + 1)
-                .reduce((a, b) => a + b, 0);
-            sma.push(sum / window);
-        }
-
-        const lastSma = sma[sma.length - 1];
-        const prevSma = sma[sma.length - 2];
-
-        if (lastSma > prevSma) {
-            return MARKET_TRAND_CONST.UP;
-        } else if (lastSma < prevSma) {
-            return MARKET_TRAND_CONST.DOWN;
-        } else {
-            return MARKET_TRAND_CONST.SIDEWAYS;
-        }
     }
 
     generatePrice(name: string) {
