@@ -2,22 +2,20 @@
     <p class="subtitle">Пользовательский тренд</p>
     <div *ngIf="userData$ | async; else needLogin" class="content">
         <div class="user-rating-score">
-            <ng-container
-                *ngIf="human_trand.up || human_trand.down; else empty"
-            >
+            <ng-container *ngIf="humanTrand.up || humanTrand.down; else empty">
                 <div
-                    *ngIf="getPercentages(human_trand.up) as perc"
+                    *ngIf="getPercentages(humanTrand.up) as perc"
                     class="user-rating-score_green"
                     [style.width.%]="perc"
                 >
-                    {{ human_trand.up }}
+                    {{ humanTrand.up }}
                 </div>
                 <div
-                    *ngIf="getPercentages(human_trand.down) as perc"
+                    *ngIf="getPercentages(humanTrand.down) as perc"
                     class="user-rating-score_red"
                     [style.width.%]="perc"
                 >
-                    {{ human_trand.down }}
+                    {{ humanTrand.down }}
                 </div>
             </ng-container>
         </div>

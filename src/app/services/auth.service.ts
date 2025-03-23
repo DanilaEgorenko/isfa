@@ -13,6 +13,7 @@ export class AuthService {
     private readonly apiUrl = "http://127.0.0.1:8000/api";
 
     userDataSubject$ = new BehaviorSubject(null);
+    userData$ = this.userDataSubject$.asObservable();
 
     constructor(private http: HttpClient) {}
 

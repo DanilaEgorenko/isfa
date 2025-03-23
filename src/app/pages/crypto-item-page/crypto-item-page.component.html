@@ -19,7 +19,7 @@
             </div>
 
             <app-user-rating
-                [human_trand]="{
+                [humanTrand]="{
                     up: item.human_trand_up,
                     down: item.human_trand_down
                 }"
@@ -83,15 +83,7 @@
     </div>
 
     <h2 class="block">Комментарии</h2>
-    <form>
-        <textarea
-            placeholder="Напишите комментарий"
-            cols="60"
-            rows="5"
-        ></textarea>
-        <button>Отправить</button>
-    </form>
-    <div *ngIf="item?.comments?.length" class="comments"></div>
+    <app-comments type="item" [id]="id"></app-comments>
 
     <ng-template #generateBtn>
         <button

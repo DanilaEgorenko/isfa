@@ -14,14 +14,25 @@
                 *ngFor="let item of collection.items"
                 [item]="{
                     name: item.name,
-                    isin: item.uuid,
+                    isin: item.id,
                     type: 'crypto',
-                    logo: item.iconUrl,
+                    logo: item.icon,
                     change: +item.change
                 }"
             ></app-item>
         </div>
 
-        <app-user-rating class="user-rating"></app-user-rating>
+        <app-user-rating
+            class="user-rating"
+            [humanTrand]="{
+                up: collection.human_trand_up,
+                down: collection.human_trand_down
+            }"
+            [id]="collection.id"
+            [userAction]="collection.user_action"
+        ></app-user-rating>
     </div>
+
+    <h2>Комментарии</h2>
+    <app-comments type="collection" [id]="id"></app-comments>
 </div>

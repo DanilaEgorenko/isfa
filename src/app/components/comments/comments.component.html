@@ -1,0 +1,52 @@
+<div class="comment-box">
+    <textarea
+        [(ngModel)]="comment"
+        id="comment-textarea"
+        class="comment-textarea"
+        placeholder="Напишите ваш комментарий..."
+        maxlength="500"
+        (input)="updateCharCount()"
+    ></textarea>
+    <div class="comment-footer">
+        <span id="char-count">{{ charCount }} / 500</span>
+        <button class="submit-button" (click)="submitComment()">
+            Отправить
+        </button>
+    </div>
+</div>
+<ng-container *ngIf="comments$ | async as comments">
+    <div *ngIf="comments?.length" class="comments">
+        <div *ngFor="let comment of comments" class="comment">
+            <div class="comment-author">
+                <a [routerLink]="['/', 'profile', comment.author.id]">
+                    <img
+                        [src]="comment.author.avatar"
+                        [alt]="comment.author.username"
+                        class="author-avatar"
+                    />
+                </a>
+                <a
+                    class="author-name"
+                    [routerLink]="['/', 'profile', comment.author.id]"
+                >
+                    {{ comment.author.username }}
+                </a>
+                <div class="comment-date">
+                    {{ comment.date | date : "d.MM.y HH:mm" }}
+                </div>
+            </div>
+
+            <div class="comment-text">
+                {{ comment.text }}
+            </div>
+
+            <button
+                *ngIf="isAuthor$(comment.author.id) | async"
+                class="delete-button"
+                (click)="deleteComment(comment.id)"
+            >
+                Удалить
+            </button>
+        </div>
+    </div>
+</ng-container>

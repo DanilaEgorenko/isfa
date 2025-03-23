@@ -24,9 +24,9 @@ export type UserAction = "up" | "down" | "none";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserRatingComponent {
-    @Input() human_trand: IHumanTrand | null = null;
+    @Input() humanTrand: IHumanTrand | null = null;
     @Input() userAction: UserAction = "none";
-    @Input() id: string;
+    @Input() id: string | number;
 
     userData$ = this.authService.userDataSubject$.asObservable();
 
@@ -40,24 +40,28 @@ export class UserRatingComponent {
     }
 
     getPercentages(trand: number): number {
-        const allTrand = this.human_trand.up + this.human_trand.down;
+        const allTrand = this.humanTrand.up + this.humanTrand.down;
         return (trand / allTrand) * 100;
     }
 
     vote(action: UserAction): void {
         this.userRatingApiService
-            .vote(this.id, action)
+            .vote(
+                `${this.id}`,
+                action,
+                isNaN(+this.id) ? "items" : "collections"
+            )
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
                 if (
                     (this.userAction === "down" && action === "up") ||
                     (this.userAction === "up" && action === "down")
                 ) {
-                    this.human_trand[this.userAction] -= 1;
+                    this.humanTrand[this.userAction] -= 1;
                     this.userAction = "none";
                 } else {
                     this.userAction = action;
-                    this.human_trand[action] += 1;
+                    this.humanTrand[action] += 1;
                 }
                 this.cdr.detectChanges();
             });

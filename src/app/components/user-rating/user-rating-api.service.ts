@@ -8,9 +8,9 @@ export class UserRatingApiService {
 
     constructor(private http: HttpClient) {}
 
-    vote(id: string, action: UserAction) {
+    vote(id: string, action: UserAction, type: "collections" | "items") {
         return this.http.post(
-            `${this.apiUrl}/items/${id}/vote/`,
+            `${this.apiUrl}/${type}/${id}/vote/`,
             { action },
             {
                 headers: {

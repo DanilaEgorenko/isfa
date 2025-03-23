@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { ChartModule } from "@app/components/chart/chart.module";
 import { UserRatingModule } from "@app/components/user-rating/user-rating.module";
 import { CryptoItemPageComponent } from "./crypto-item-page.component";
+import { CommentsModule } from "@app/components/comments/comments.module";
 
 const routes = [{ path: "", component: CryptoItemPageComponent }];
 
@@ -15,6 +16,7 @@ const routes = [{ path: "", component: CryptoItemPageComponent }];
         FormsModule,
         UserRatingModule,
         ChartModule,
+        CommentsModule,
     ],
     declarations: [CryptoItemPageComponent],
 })
