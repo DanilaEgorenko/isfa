@@ -25,6 +25,7 @@
     justify-content: center;
     min-height: 80px;
     flex-grow: 1;
+    align-items: center;
 }
 
 .block {
@@ -59,6 +60,15 @@ button {
 
     &:hover {
         transform: scale(1.1);
+    }
+
+    &.green {
+        background-color: var(--color-green);
+    }
+
+    &.red {
+        background-color: var(--color-red);
+        color: white;
     }
 }
 

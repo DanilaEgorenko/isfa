@@ -1,20 +1,29 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { CryptoApiService, HeaderDataService } from "@app/services";
+import {
+    CryptoApiService,
+    DestroyService,
+    FavoriteService,
+    HeaderDataService,
+} from "@app/services";
 import { TranslateService } from "@app/services/translate.service";
 import { BehaviorSubject } from "rxjs";
-import { map, tap } from "rxjs/operators";
+import { map, takeUntil, tap } from "rxjs/operators";
 import { MARKET_TRAND_CONST } from "./constants";
 
 @Component({
     selector: "app-crypto-item-page",
     templateUrl: "./crypto-item-page.component.html",
     styleUrls: ["./crypto-item-page.component.scss"],
+    providers: [DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CryptoItemPageComponent implements OnDestroy {
     readonly MARKET_TRAND_CONST = MARKET_TRAND_CONST;
     readonly id = this.route.snapshot.paramMap.get("id");
+
+    isFavoriteSubject = new BehaviorSubject(false);
+    isFavorite$ = this.isFavoriteSubject.asObservable();
 
     isGeneratingPriceSubject = new BehaviorSubject(false);
     isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
@@ -23,21 +32,24 @@ export class CryptoItemPageComponent implements OnDestroy {
 
     item$ = this.cryptoApiService.getCryproById(this.id).pipe(
         map((res) => res.data),
-        tap(({ coin }) =>
+        tap(({ coin, favourite }) => {
             this.headerDataService.updateData({
                 name: coin.name,
                 symbol: coin.symbol,
                 change: coin.change,
                 color: coin.color,
-            })
-        )
+            });
+            this.isFavoriteSubject.next(favourite);
+        })
     );
 
     constructor(
         private cryptoApiService: CryptoApiService,
+        private favoriteService: FavoriteService,
         private headerDataService: HeaderDataService,
         private translateService: TranslateService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private destroy$: DestroyService
     ) {
         this.cryptoApiService.getCryptoHistory().subscribe();
     }
@@ -77,6 +89,15 @@ export class CryptoItemPageComponent implements OnDestroy {
                 this.roundNumber(Math.random() * (+highPrice - +price) + +price)
             );
         }, 5000);
+    }
+
+    toggleFavorite(id: string): void {
+        this.favoriteService
+            .toggleFavorite(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(({ is_favorite }: { is_favorite: boolean }) =>
+                this.isFavoriteSubject.next(is_favorite)
+            );
     }
 
     // translate(text: string): Observable<string> {

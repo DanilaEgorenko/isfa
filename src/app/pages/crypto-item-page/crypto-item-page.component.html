@@ -82,6 +82,22 @@
         </div>
     </div>
 
+    <h2 class="block">Действия</h2>
+    <div *ngIf="isFavorite$ | async as isFavorite" class="content">
+        <div class="container">
+            <p class="subtitle">Избранное</p>
+            <button
+                [ngClass]="isFavorite ? 'red' : 'green'"
+                (click)="toggleFavorite(item.coin.uuid)"
+            >
+                {{ isFavorite ? "Убрать" : "Добавить" }}
+            </button>
+        </div>
+        <div class="container">
+            <p class="subtitle">Виртуальный портфель</p>
+        </div>
+    </div>
+
     <h2 class="block">Комментарии</h2>
     <app-comments type="item" [id]="id"></app-comments>
 

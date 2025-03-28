@@ -6,6 +6,7 @@ export interface ICoinApiResponse {
     status: string;
     data: {
         coin: ICoin;
+        favourite: boolean;
         retail_trand: EMarketTrand;
         human_trand_up: number;
         human_trand_down: number;

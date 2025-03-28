@@ -47,9 +47,22 @@
     </div>
 
     <div class="wrapper">
-        <div class="container favorites">
+        <div class="container">
             <h2>Избранное</h2>
-            <div *ngIf="profileInfo?.favorites.length; else empty"></div>
+            <div
+                *ngIf="profileInfo?.favorites.length; else empty"
+                class="favorites"
+            >
+                <ng-container *ngFor="let favorite of profileInfo?.favorites">
+                    <div
+                        class="item"
+                        [routerLink]="['/', favorite.type, favorite.id]"
+                        [ngStyle]="{
+                            'background-image': 'url(' + favorite.icon + ')'
+                        }"
+                    ></div>
+                </ng-container>
+            </div>
         </div>
 
         <div class="container virtual-portfolio">
