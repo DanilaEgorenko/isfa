@@ -30,14 +30,20 @@ export class ProfilePageComponent {
         private router: Router,
         private route: ActivatedRoute,
         private destroy$: DestroyService
-    ) {
-        this.isLoading$.subscribe((data) => console.log(data));
-    }
+    ) {}
 
     logout() {
         this.authService
             .logout()
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => this.router.navigateByUrl("/"));
+    }
+
+    getVirtualStockValue(arr: any[]): number {
+        return arr.reduce((a, r) => a + r.value * r.count, 0);
+    }
+
+    getDiffVirtualPrice(nowPrice: number, boughtPrice: number): number {
+        return Math.round(((nowPrice - boughtPrice) / nowPrice) * 100);
     }
 }

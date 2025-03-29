@@ -83,18 +83,73 @@
     </div>
 
     <h2 class="block">Действия</h2>
-    <div *ngIf="isFavorite$ | async as isFavorite" class="content">
+    <div class="content">
         <div class="container">
             <p class="subtitle">Избранное</p>
             <button
-                [ngClass]="isFavorite ? 'red' : 'green'"
+                [ngClass]="(isFavorite$ | async) ? 'red' : 'green'"
                 (click)="toggleFavorite(item.coin.uuid)"
             >
-                {{ isFavorite ? "Убрать" : "Добавить" }}
+                {{ (isFavorite$ | async) ? "Убрать" : "Добавить" }}
             </button>
         </div>
         <div class="container">
             <p class="subtitle">Виртуальный портфель</p>
+            <div class="virtual-content">
+                <div *ngIf="virtualStock$ | async as virtualStock">
+                    <p>Количество: {{ virtualStock?.count || 0 }}</p>
+                    <p>
+                        Сумма: {{ virtualStock?.value || 0 }}
+                        {{
+                            getDiffCurrPrice(
+                                getVirtualPrice(
+                                    virtualStock?.value,
+                                    virtualStock?.count
+                                ) + "",
+                                item?.coin.price
+                            )
+                        }}
+                    </p>
+                </div>
+                <div>
+                    <div class="comment-box">
+                        <input
+                            type="number"
+                            class="comment-input"
+                            placeholder="Введите количество"
+                            #quantity
+                        />
+                    </div>
+                    <div class="buttons">
+                        <button
+                            class="green"
+                            (click)="
+                                manageVirtualStock(
+                                    item.coin.uuid,
+                                    +quantity.value,
+                                    'add',
+                                    +item.coin.price
+                                )
+                            "
+                        >
+                            Добавить
+                        </button>
+                        <button
+                            *ngIf="virtualStock$ | async"
+                            class="red"
+                            (click)="
+                                manageVirtualStock(
+                                    item.coin.uuid,
+                                    +quantity.value,
+                                    'remove'
+                                )
+                            "
+                        >
+                            Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -67,7 +67,32 @@
 
         <div class="container virtual-portfolio">
             <h2>Виртуальный портфель</h2>
-            <div *ngIf="profileInfo?.virtual_portfolio; else empty"></div>
+            <div
+                *ngIf="
+                    profileInfo?.virtual_stock_portfolio as virtual_stock_portfolio;
+                    else empty
+                "
+            >
+                <p>
+                    Стоимость:
+                    {{ getVirtualStockValue(virtual_stock_portfolio) }}
+                </p>
+                <div class="content-virtual-stocks">
+                    <app-item
+                        *ngFor="let stock_item of virtual_stock_portfolio"
+                        [item]="{
+                            name: stock_item.item.name,
+                            isin: stock_item.item.id,
+                            type: stock_item.item.type,
+                            logo: stock_item.item.icon,
+                            change: getDiffVirtualPrice(
+                                stock_item.item.price,
+                                stock_item.value
+                            )
+                        }"
+                    ></app-item>
+                </div>
+            </div>
         </div>
     </div>
 

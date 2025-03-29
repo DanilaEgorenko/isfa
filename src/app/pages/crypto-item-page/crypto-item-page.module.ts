@@ -6,6 +6,7 @@ import { ChartModule } from "@app/components/chart/chart.module";
 import { UserRatingModule } from "@app/components/user-rating/user-rating.module";
 import { CryptoItemPageComponent } from "./crypto-item-page.component";
 import { CommentsModule } from "@app/components/comments/comments.module";
+import { ItemModule } from "@app/components/item/item.module";
 
 const routes = [{ path: "", component: CryptoItemPageComponent }];
 

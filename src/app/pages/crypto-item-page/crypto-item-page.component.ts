@@ -5,6 +5,7 @@ import {
     DestroyService,
     FavoriteService,
     HeaderDataService,
+    VirtualStockService,
 } from "@app/services";
 import { TranslateService } from "@app/services/translate.service";
 import { BehaviorSubject } from "rxjs";
@@ -25,6 +26,9 @@ export class CryptoItemPageComponent implements OnDestroy {
     isFavoriteSubject = new BehaviorSubject(false);
     isFavorite$ = this.isFavoriteSubject.asObservable();
 
+    virtualStockSubject = new BehaviorSubject(null);
+    virtualStock$ = this.virtualStockSubject.asObservable();
+
     isGeneratingPriceSubject = new BehaviorSubject(false);
     isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
     generatedPriceSubject = new BehaviorSubject(null);
@@ -32,7 +36,7 @@ export class CryptoItemPageComponent implements OnDestroy {
 
     item$ = this.cryptoApiService.getCryproById(this.id).pipe(
         map((res) => res.data),
-        tap(({ coin, favourite }) => {
+        tap(({ coin, favourite, virtual_stock }) => {
             this.headerDataService.updateData({
                 name: coin.name,
                 symbol: coin.symbol,
@@ -40,6 +44,12 @@ export class CryptoItemPageComponent implements OnDestroy {
                 color: coin.color,
             });
             this.isFavoriteSubject.next(favourite);
+            if (virtual_stock) {
+                this.virtualStockSubject.next({
+                    count: virtual_stock?.count || 0,
+                    value: virtual_stock?.value || 0,
+                });
+            }
         })
     );
 
@@ -47,6 +57,7 @@ export class CryptoItemPageComponent implements OnDestroy {
         private cryptoApiService: CryptoApiService,
         private favoriteService: FavoriteService,
         private headerDataService: HeaderDataService,
+        private virtualStockService: VirtualStockService,
         private translateService: TranslateService,
         private route: ActivatedRoute,
         private destroy$: DestroyService
@@ -76,8 +87,13 @@ export class CryptoItemPageComponent implements OnDestroy {
         return num.toFixed(3);
     }
 
+    getVirtualPrice(value: number, count: number): number {
+        return value / count;
+    }
+
     getDiffCurrPrice(highPrice: string, currPrice: string): string {
         const formula = +currPrice / (+highPrice / 100);
+        if (isNaN(formula)) return "";
         return `(${-Math.round(100 - formula)}%)`;
     }
 
@@ -98,6 +114,23 @@ export class CryptoItemPageComponent implements OnDestroy {
             .subscribe(({ is_favorite }: { is_favorite: boolean }) =>
                 this.isFavoriteSubject.next(is_favorite)
             );
+    }
+
+    manageVirtualStock(
+        id: string,
+        quantity: number,
+        type: "add" | "remove",
+        price_per_unit?: number
+    ): void {
+        this.virtualStockService
+            .manageVirtualStock(id, quantity, type, price_per_unit)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((virtual_stock: any) => {
+                this.virtualStockSubject.next({
+                    count: virtual_stock?.count,
+                    value: virtual_stock?.value,
+                });
+            });
     }
 
     // translate(text: string): Observable<string> {

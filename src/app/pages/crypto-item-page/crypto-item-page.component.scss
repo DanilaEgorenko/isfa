@@ -64,6 +64,7 @@ button {
 
     &.green {
         background-color: var(--color-green);
+        color: white;
     }
 
     &.red {
@@ -103,6 +104,41 @@ button {
     animation: rotate 3s linear infinite;
     color: white;
     cursor: wait;
+}
+
+.comment-box {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comment-input {
+    width: calc(100% - 50px);
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: none; /* Отключаем изменение размера */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-input:focus {
+    border-color: var(--color-green);
+    box-shadow: 0 0 8px var(--color-green);
+}
+
+.comment-input::placeholder {
+    color: #999;
+}
+
+.virtual-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+    align-items: baseline;
 }
 
 @keyframes rotate {

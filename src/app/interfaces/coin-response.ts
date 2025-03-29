@@ -12,5 +12,10 @@ export interface ICoinApiResponse {
         human_trand_down: number;
         user_action: UserAction;
         comments: any[];
+        virtual_stock: {
+            value: number;
+            count: number;
+            id: number;
+        };
     };
 }
