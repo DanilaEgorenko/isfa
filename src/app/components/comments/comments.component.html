@@ -20,7 +20,7 @@
             <div class="comment-author">
                 <a [routerLink]="['/', 'profile', comment.author.id]">
                     <img
-                        [src]="comment.author.avatar"
+                        [src]="comment.author?.avatar || DEFAULT_PIC"
                         [alt]="comment.author.username"
                         class="author-avatar"
                     />

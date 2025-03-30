@@ -28,7 +28,7 @@ export class UserRatingComponent {
     @Input() userAction: UserAction = "none";
     @Input() id: string | number;
 
-    userData$ = this.authService.userDataSubject$.asObservable();
+    userData$ = this.authService.userDataSubject.asObservable();
 
     constructor(
         private authService: AuthService,

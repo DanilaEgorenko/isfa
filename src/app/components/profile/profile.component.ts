@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     isLoginPage$ = new BehaviorSubject<boolean>(false);
     data$ = this.headerDataService.data$;
 
-    userData$ = this.authService.userDataSubject$.asObservable();
+    userData$ = this.authService.userData$;
 
     constructor(
         private headerDataService: HeaderDataService,

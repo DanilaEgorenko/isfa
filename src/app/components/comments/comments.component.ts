@@ -5,6 +5,7 @@ import {
     OnInit,
     ChangeDetectorRef,
 } from "@angular/core";
+import { DEFAULT_PIC } from "@app/constants";
 import { AuthService, CommentsService, DestroyService } from "@app/services";
 import { Observable, of } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
@@ -28,6 +29,8 @@ export interface IComment {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentsComponent implements OnInit {
+    readonly DEFAULT_PIC = DEFAULT_PIC;
+
     charCount: number = 0;
     comment: string = "";
 
@@ -35,7 +38,7 @@ export class CommentsComponent implements OnInit {
     @Input() type: "collection" | "item";
 
     comments$ = of([]);
-    userId$ = this.authService.userData$.pipe(map(({ id }) => id));
+    userId$ = this.authService.userData$.pipe(map((user) => user?.id));
 
     constructor(
         private authService: AuthService,
@@ -46,6 +49,7 @@ export class CommentsComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadComments();
+        this.authService.loadUserData();
     }
 
     loadComments() {
@@ -61,11 +65,6 @@ export class CommentsComponent implements OnInit {
     submitComment(): void {
         if (this.comment.trim().length === 0) {
             alert("Комментарий не может быть пустым!");
-            return;
-        }
-
-        if (this.comment.length > 500) {
-            alert("Комментарий слишком длинный!");
             return;
         }
 
@@ -85,7 +84,12 @@ export class CommentsComponent implements OnInit {
     }
 
     isAuthor$(authorId: number): Observable<boolean> {
-        return this.userId$.pipe(map((id) => id === authorId));
+        return this.userId$.pipe(
+            map((id) => {
+                console.log(id, authorId);
+                return id === authorId;
+            })
+        );
     }
 
     deleteComment(id: number): void {

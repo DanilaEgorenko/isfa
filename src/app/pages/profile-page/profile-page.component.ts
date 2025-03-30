@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DEFAULT_PIC } from "@app/constants";
 import { DestroyService } from "@app/services";
@@ -13,16 +13,14 @@ import { map, takeUntil } from "rxjs/operators";
     providers: [ProfileService, DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
     readonly DEFAULT_PIC = DEFAULT_PIC;
     readonly id = Number(this.route.snapshot.paramMap.get("id"));
 
     profileInfo$ = this.profileService.getData(this.id);
     isLoading$ = this.profileService.isLoading$;
-    userData$ = this.authService.userDataSubject$.asObservable();
-    isMineProdile$ = this.userData$.pipe(
-        map(({ user_id }) => user_id === this.id)
-    );
+    userData$ = this.authService.userData$;
+    isMineProdile$ = this.userData$.pipe(map((user) => user.id === this.id));
 
     constructor(
         private profileService: ProfileService,
@@ -32,6 +30,10 @@ export class ProfilePageComponent {
         private destroy$: DestroyService
     ) {}
 
+    ngOnInit(): void {
+        this.authService.loadUserData();
+    }
+
     logout() {
         this.authService
             .logout()
@@ -40,7 +42,7 @@ export class ProfilePageComponent {
     }
 
     getVirtualStockValue(arr: any[]): number {
-        return arr.reduce((a, r) => a + r.value * r.count, 0);
+        return Math.round(arr.reduce((a, r) => a + r.value * r.count, 0));
     }
 
     getDiffVirtualPrice(nowPrice: number, boughtPrice: number): number {
