@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class MainApiService {
@@ -23,11 +24,5 @@ export class MainApiService {
         //         },
         //     }
         // );
-    }
-
-    getLogoCompany(ISIN: string) {
-        return this.http.get(
-            `https://invest-brands.cdn-tinkoff.ru/${ISIN}x640.png`
-        );
     }
 }

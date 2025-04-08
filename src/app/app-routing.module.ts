@@ -45,6 +45,41 @@ export const routes: Routes = [
                 (m) => m.CryptoPageModule
             ),
     },
+    {
+        path: ERoutes.SHARES,
+        loadChildren: () =>
+            import("./pages/shares-page/shares-page.module").then(
+                (m) => m.SharesPageModule
+            ),
+    },
+    {
+        path: ERoutes.ETFS,
+        loadChildren: () =>
+            import("./pages/etf-page/etf-page.module").then(
+                (m) => m.EtfPageModule
+            ),
+    },
+    {
+        path: ERoutes.BONDS,
+        loadChildren: () =>
+            import("./pages/bonds-page/bonds-page.module").then(
+                (m) => m.BondsPageModule
+            ),
+    },
+    {
+        path: ERoutes.FUTURES,
+        loadChildren: () =>
+            import("./pages/futures-page/futures-page.module").then(
+                (m) => m.FuturesPageModule
+            ),
+    },
+    {
+        path: ERoutes.OPTIONS,
+        loadChildren: () =>
+            import("./pages/options-page/options-page.module").then(
+                (m) => m.OptionsPageModule
+            ),
+    },
 ];
 
 @NgModule({

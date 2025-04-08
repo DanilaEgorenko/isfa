@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+} from "@angular/core";
 import { IItem } from "@app/interfaces";
 
 @Component({
@@ -10,7 +15,12 @@ import { IItem } from "@app/interfaces";
 export class ItemComponent {
     @Input() item: IItem & { wrappedColor?: boolean };
 
-    getLogo(isin: string): string {
-        return `https://invest-brands.cdn-tinkoff.ru/${isin}x160.png`;
+    getLogo(item: IItem): string {
+        if (item.type === "crypto") return item.logo;
+        if (item.logo === "test.png") return null;
+
+        return `https://invest-brands.cdn-tinkoff.ru/${
+            item.logo.split(".")[0]
+        }x160.png`;
     }
 }

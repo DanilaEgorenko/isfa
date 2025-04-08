@@ -11,6 +11,12 @@ import { TranslateService } from "@app/services/translate.service";
 import { BehaviorSubject } from "rxjs";
 import { map, takeUntil, tap } from "rxjs/operators";
 import { MARKET_TRAND_CONST } from "./constants";
+import {
+    formatNumber,
+    getDiffCurrPrice,
+    getVirtualPrice,
+    roundNumber,
+} from "@app/utils";
 
 @Component({
     selector: "app-crypto-item-page",
@@ -20,6 +26,10 @@ import { MARKET_TRAND_CONST } from "./constants";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CryptoItemPageComponent implements OnDestroy {
+    readonly formatNumber = formatNumber;
+    readonly roundNumber = roundNumber;
+    readonly getDiffCurrPrice = getDiffCurrPrice;
+    readonly getVirtualPrice = getVirtualPrice;
     readonly MARKET_TRAND_CONST = MARKET_TRAND_CONST;
     readonly id = this.route.snapshot.paramMap.get("id");
 
@@ -34,8 +44,7 @@ export class CryptoItemPageComponent implements OnDestroy {
     generatedPriceSubject = new BehaviorSubject(null);
     generatedPrice$ = this.generatedPriceSubject.asObservable();
 
-    item$ = this.cryptoApiService.getCryproById(this.id).pipe(
-        map((res) => res.data),
+    item$ = this.cryptoApiService.getById(this.id).pipe(
         tap(({ coin, favourite, virtual_stock }) => {
             this.headerDataService.updateData({
                 name: coin.name,
@@ -67,34 +76,6 @@ export class CryptoItemPageComponent implements OnDestroy {
 
     ngOnDestroy(): void {
         this.headerDataService.updateData(null);
-    }
-
-    formatNumber(num: string): string {
-        if (+num >= 1e12) {
-            return (+num / 1e12).toFixed(2).replace(".", ",") + "трлд";
-        }
-        if (+num >= 1e9) {
-            return (+num / 1e9).toFixed(2).replace(".", ",") + "млрд";
-        }
-        if (+num >= 1e6) {
-            return (+num / 1e6).toFixed(2).replace(".", ",") + "млн";
-        }
-
-        return `${num}`;
-    }
-
-    roundNumber(num: number): string {
-        return num.toFixed(3);
-    }
-
-    getVirtualPrice(value: number, count: number): number {
-        return value / count;
-    }
-
-    getDiffCurrPrice(highPrice: string, currPrice: string): string {
-        const formula = +currPrice / (+highPrice / 100);
-        if (isNaN(formula)) return "";
-        return `(${-Math.round(100 - formula)}%)`;
     }
 
     generatePrice(highPrice: string, price: string) {

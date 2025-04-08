@@ -1,16 +1,13 @@
-<div class="container">
-    <h2>Криптовалюта</h2>
-    <div class="content">
-        <app-item
-            *ngFor="let item of items$ | async"
-            [item]="{
-                name: item.name,
-                isin: item.uuid,
-                type: 'crypto',
-                logo: item.iconUrl,
-                change: item.change
-            }"
-        ></app-item>
-    </div>
-    <button (click)="loadMore()">Загрузить ещё</button>
+<div class="content">
+    <app-item
+        *ngFor="let item of items$ | async"
+        [item]="{
+            name: item.name,
+            isin: item.uuid,
+            type: 'crypto',
+            logo: item.iconUrl,
+            change: item.change
+        }"
+    ></app-item>
 </div>
+<button (click)="loadMore()">Загрузить ещё</button>

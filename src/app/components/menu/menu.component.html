@@ -2,10 +2,11 @@
 
 <div *ngIf="opened" class="menu">
     <nav (click)="opened = !opened">
-        <a routerLink="/stocks" routerLinkActive="active">Акции</a>
-        <a routerLink="/mutual-funds" routerLinkActive="active">Паи</a>
-        <a routerLink="/bonds" routerLinkActive="active">Облигации</a>
-        <a routerLink="/crypto" routerLinkActive="active">Криптовалюта</a>
-        <a routerLink="/futures" routerLinkActive="active">Фьючерсы</a>
+        <a [routerLink]="'/' + ERoutes.SHARES">Акции</a>
+        <a [routerLink]="'/' + ERoutes.ETFS">Паи</a>
+        <a [routerLink]="'/' + ERoutes.BONDS">Облигации</a>
+        <a [routerLink]="'/' + ERoutes.FUTURES">Фьючерсы</a>
+        <a [routerLink]="'/' + ERoutes.OPTIONS">Опционы</a>
+        <a [routerLink]="'/' + ERoutes.CRYPTO">Криптовалюта</a>
     </nav>
 </div>

@@ -2,8 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ICoinApiResponse } from "@app/interfaces";
 import { IApiResponse } from "@app/pages/crypto-page/interfaces";
-import { first, map, switchMap } from "rxjs/operators";
-import { AuthService } from "./auth.service";
+import { map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class CryptoApiService {
@@ -23,7 +22,7 @@ export class CryptoApiService {
         );
     }
 
-    getCryproById(id: string) {
+    getById(id: string) {
         return this.http.get<ICoinApiResponse>(`${this.apiUrl}crypto/${id}/`, {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("access")}`,

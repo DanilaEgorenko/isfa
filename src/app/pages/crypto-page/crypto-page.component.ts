@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { DestroyService } from "@app/services/destroy.service";
 import { BehaviorSubject, combineLatest } from "rxjs";
 import { first, map, takeUntil, throttleTime } from "rxjs/operators";
-import { CryptoApiService } from "@app/services";
+import { CryptoApiService, HeaderDataService } from "@app/services";
 
 @Component({
     selector: "app-crypto-page",
@@ -17,8 +17,15 @@ export class CryptoPageComponent implements OnInit {
 
     constructor(
         private cryptoApiService: CryptoApiService,
+        private headerDataService: HeaderDataService,
         private destroy$: DestroyService
-    ) {}
+    ) {
+        this.headerDataService.updateData({ name: "Криптовалюта" });
+    }
+
+    ngOnDestroy(): void {
+        this.headerDataService.updateData(null);
+    }
 
     ngOnInit(): void {
         this.cryptoApiService

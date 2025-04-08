@@ -8,8 +8,8 @@
     <div
         class="logo"
         [ngStyle]="{
-            'background-image':
-                'url(' + (item.logo || this.getLogo(item.isin)) + ')'
+            'background-image': 'url(' + this.getLogo(item) + ')',
+            'background-color': this.getLogo(item) ? '' : 'var(--color-gray)'
         }"
     ></div>
     <p class="name">{{ item.name }}</p>

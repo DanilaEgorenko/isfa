@@ -84,12 +84,7 @@ export class CommentsComponent implements OnInit {
     }
 
     isAuthor$(authorId: number): Observable<boolean> {
-        return this.userId$.pipe(
-            map((id) => {
-                console.log(id, authorId);
-                return id === authorId;
-            })
-        );
+        return this.userId$.pipe(map((id) => id === authorId));
     }
 
     deleteComment(id: number): void {

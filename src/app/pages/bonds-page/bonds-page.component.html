@@ -1,0 +1,12 @@
+<div class="content">
+    <app-item
+        *ngFor="let item of items$ | async"
+        [item]="{
+            name: item.name,
+            isin: item.isin,
+            type: 'bonds',
+            logo: item.brand.logoName,
+            change: item.change
+        }"
+    ></app-item>
+</div>

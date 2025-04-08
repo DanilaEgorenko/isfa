@@ -1,0 +1,189 @@
+<ng-container *ngIf="item$ | async as item">
+    <div class="top-content">
+        <app-item-chart [data]="chartData$ | async"></app-item-chart>
+
+        <div class="side-content">
+            <div class="container">
+                <p class="subtitle">Рыночный тренд</p>
+                <div class="content">
+                    <p
+                        title="Вырастет или упадёт"
+                        class="market-trand"
+                        [ngStyle]="{
+                            color: MARKET_TRAND_CONST[item?.retail_trand]?.color
+                        }"
+                    >
+                        {{ MARKET_TRAND_CONST[item?.retail_trand]?.title }}
+                    </p>
+                </div>
+            </div>
+
+            <app-user-rating
+                [humanTrand]="{
+                    up: item.human_trand_up,
+                    down: item.human_trand_down
+                }"
+                [userAction]="item.user_action"
+                [id]="item.figi"
+            ></app-user-rating>
+
+            <div class="container">
+                <p class="subtitle">Цена от ИИ</p>
+                <div class="content">
+                    <ng-container
+                        *ngIf="
+                            generatedPrice$ | async as price;
+                            else generateBtn
+                        "
+                    >
+                        {{ price }}
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="block">Данные</h2>
+    <div class="content">
+        <div *ngIf="item?.price" class="container">
+            <p class="subtitle">Цена за шт (за лот)</p>
+            <p>
+                {{ roundNumber(item?.price, 1) }}
+                {{
+                    item.lot > 1
+                        ? "(" + roundNumber(item?.price * item.lot, 1) + ")"
+                        : ""
+                }}
+            </p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Штук в лоте</p>
+            <p>{{ item.lot }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Статус</p>
+            <p>{{ item.buyAvailableFlag ? "Торгуется" : "Не торгуется" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Див доходность</p>
+            <p>{{ item.divYieldFlag ? "Есть" : "Нет" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Для ИИС</p>
+            <p>{{ item.forIisFlag ? "Да" : "Нет" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Для квалов</p>
+            <p>{{ item.forQualInvestorFlag ? "Да" : "Нет" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Выход на биржу</p>
+            <p>{{ item.ipoDate | date : "d.MM.y" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Размер выпуска (Отклонение от плана)</p>
+            <p>
+                {{ item.issueSize }}
+                {{ getDiffCurrPrice(item.issueSizePlan, item.issueSize) }}
+            </p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Хорошая ликвидность</p>
+            <p>{{ item.liquidityFlag ? "Да" : "Нет" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Шорт</p>
+            <p>{{ item.shortEnabledFlag ? "Да" : "Нет" }}</p>
+        </div>
+        <div class="container">
+            <p class="subtitle">Выходные торги</p>
+            <p>{{ item.weekendFlag ? "Да" : "Нет" }}</p>
+        </div>
+    </div>
+
+    <!-- <h2 class="block">Действия</h2>
+    <div class="content">
+        <div class="container">
+            <p class="subtitle">Избранное</p>
+            <button
+                [ngClass]="(isFavorite$ | async) ? 'red' : 'green'"
+                (click)="toggleFavorite(item.coin.uuid)"
+            >
+                {{ (isFavorite$ | async) ? "Убрать" : "Добавить" }}
+            </button>
+        </div>
+        <div class="container">
+            <p class="subtitle">Виртуальный портфель</p>
+            <div class="virtual-content">
+                <div *ngIf="virtualStock$ | async as virtualStock">
+                    <p>Количество: {{ virtualStock?.count || 0 }}</p>
+                    <p>
+                        Сумма: {{ virtualStock?.value || 0 }}
+                        {{
+                            getDiffCurrPrice(
+                                getVirtualPrice(
+                                    virtualStock?.value,
+                                    virtualStock?.count
+                                ) + "",
+                                item?.coin.price
+                            )
+                        }}
+                    </p>
+                </div>
+                <div>
+                    <div class="comment-box">
+                        <input
+                            type="number"
+                            class="comment-input"
+                            placeholder="Введите количество"
+                            #quantity
+                        />
+                    </div>
+                    <div class="buttons">
+                        <button
+                            class="green"
+                            (click)="
+                                manageVirtualStock(
+                                    item.coin.uuid,
+                                    +quantity.value,
+                                    'add',
+                                    +item.coin.price
+                                )
+                            "
+                        >
+                            Добавить
+                        </button>
+                        <button
+                            *ngIf="virtualStock$ | async"
+                            class="red"
+                            (click)="
+                                manageVirtualStock(
+                                    item.coin.uuid,
+                                    +quantity.value,
+                                    'remove'
+                                )
+                            "
+                        >
+                            Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <h2 class="block">Комментарии</h2>
+    <app-comments type="item" [id]="item.figi"></app-comments>
+
+    <ng-template #generateBtn>
+        <button
+            [disabled]="isGeneratingPrice$ | async"
+            (click)="generatePrice(item.price * 2 + '', item.price)"
+            [ngClass]="{
+                'generating-price': isGeneratingPrice$ | async
+            }"
+        >
+            {{ (isGeneratingPrice$ | async) ? "Узнаём..." : "Узнать" }}
+        </button>
+    </ng-template>
+</ng-container>

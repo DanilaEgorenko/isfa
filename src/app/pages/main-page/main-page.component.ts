@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { CollectionService, CryptoApiService } from "@app/services";
 import { map } from "rxjs/operators";
+import { MainApiService } from "./main-api.service";
 
 @Component({
     selector: "app-main-page",

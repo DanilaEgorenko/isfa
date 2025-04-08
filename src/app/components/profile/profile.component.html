@@ -3,7 +3,7 @@
     <div *ngIf="data$ | async as data" class="data">
         <h1>{{ data?.name }}</h1>
         <p class="symbol">{{ data?.symbol }}</p>
-        <app-price-change [change]="data.change"></app-price-change>
+        <app-price-change [change]="data?.change"></app-price-change>
     </div>
     <a
         *ngIf="userData$ | async as user; else login"
