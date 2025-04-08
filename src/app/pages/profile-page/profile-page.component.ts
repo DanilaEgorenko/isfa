@@ -4,6 +4,7 @@ import { DEFAULT_PIC } from "@app/constants";
 import { DestroyService } from "@app/services";
 import { AuthService } from "@app/services/auth.service";
 import { ProfileService } from "@app/services/profile.service";
+import { getLogo } from "@app/utils";
 import { map, takeUntil } from "rxjs/operators";
 
 @Component({
@@ -14,6 +15,7 @@ import { map, takeUntil } from "rxjs/operators";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePageComponent implements OnInit {
+    readonly getLogo = getLogo;
     readonly DEFAULT_PIC = DEFAULT_PIC;
     readonly id = Number(this.route.snapshot.paramMap.get("id"));
 
@@ -46,6 +48,7 @@ export class ProfilePageComponent implements OnInit {
     }
 
     getDiffVirtualPrice(nowPrice: number, boughtPrice: number): number {
+        if (!nowPrice) return 0;
         return Math.round(((nowPrice - boughtPrice) / nowPrice) * 100);
     }
 }

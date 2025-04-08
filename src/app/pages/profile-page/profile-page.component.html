@@ -58,7 +58,7 @@
                         class="item"
                         [routerLink]="['/', favorite.type, favorite.id]"
                         [ngStyle]="{
-                            'background-image': 'url(' + favorite.icon + ')'
+                            'background-image': 'url(' + getLogo(favorite) + ')'
                         }"
                     ></div>
                 </ng-container>

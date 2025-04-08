@@ -53,7 +53,7 @@ export class ItemPageComponent implements OnDestroy {
                 change: item?.change && roundNumber(item.change, 1),
                 color: item.brand.logoBaseColor,
             });
-            this.isFavoriteSubject.next(item.favourite);
+            this.isFavoriteSubject.next(item.favorite);
             if (item.virtual_stock) {
                 this.virtualStockSubject.next({
                     count: item.virtual_stock?.count || 0,

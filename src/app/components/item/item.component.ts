@@ -5,6 +5,7 @@ import {
     Input,
 } from "@angular/core";
 import { IItem } from "@app/interfaces";
+import { getLogo } from "@app/utils";
 
 @Component({
     selector: "app-item",
@@ -13,14 +14,6 @@ import { IItem } from "@app/interfaces";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
+    readonly getLogo = getLogo;
     @Input() item: IItem & { wrappedColor?: boolean };
-
-    getLogo(item: IItem): string {
-        if (item.type === "crypto") return item.logo;
-        if (item.logo === "test.png") return null;
-
-        return `https://invest-brands.cdn-tinkoff.ru/${
-            item.logo.split(".")[0]
-        }x160.png`;
-    }
 }
