@@ -33,6 +33,9 @@ export class CryptoItemPageComponent implements OnDestroy {
     readonly MARKET_TRAND_CONST = MARKET_TRAND_CONST;
     readonly id = this.route.snapshot.paramMap.get("id");
 
+    isLoading$ = this.cryptoApiService.isLoading$;
+    isError$ = this.cryptoApiService.isError$;
+
     isFavoriteSubject = new BehaviorSubject(false);
     isFavorite$ = this.isFavoriteSubject.asObservable();
 

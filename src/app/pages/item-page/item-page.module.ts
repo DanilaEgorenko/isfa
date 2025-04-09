@@ -7,6 +7,7 @@ import { UserRatingModule } from "@app/components/user-rating/user-rating.module
 import { ItemPageComponent } from "./item-page.component";
 import { CommentsModule } from "@app/components/comments/comments.module";
 import { ItemChartModule } from "@app/components/item-chart/item-chart.module";
+import { LoadSpinnerModule } from "@app/components/load-spinner/load-spinner.module";
 
 const routes = [{ path: "", component: ItemPageComponent }];
 
@@ -19,6 +20,7 @@ const routes = [{ path: "", component: ItemPageComponent }];
         ChartModule,
         CommentsModule,
         ItemChartModule,
+        LoadSpinnerModule,
     ],
     declarations: [ItemPageComponent],
 })

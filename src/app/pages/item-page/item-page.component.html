@@ -1,3 +1,7 @@
+<app-load-spinner
+    [isLoading]="isLoading$ | async"
+    [error]="isError$ | async"
+></app-load-spinner>
 <ng-container *ngIf="item$ | async as item">
     <div class="top-content">
         <app-item-chart [data]="chartData$ | async"></app-item-chart>

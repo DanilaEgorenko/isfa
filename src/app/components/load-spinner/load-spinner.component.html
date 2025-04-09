@@ -1,0 +1,9 @@
+<div *ngIf="isLoading" id="loader">
+    <div class="spinner"></div>
+</div>
+<div *ngIf="error" class="error">
+    ОШИБКА
+    <p>
+        {{ error }}
+    </p>
+</div>

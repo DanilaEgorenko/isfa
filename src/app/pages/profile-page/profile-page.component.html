@@ -1,3 +1,7 @@
+<app-load-spinner
+    [isLoading]="isLoading$ | async"
+    [error]="isError$ | async"
+></app-load-spinner>
 <ng-container
     *ngIf="profileInfo$ | async as profileInfo; else undefinedProfile"
 >

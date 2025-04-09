@@ -19,8 +19,10 @@ export class ProfilePageComponent implements OnInit {
     readonly DEFAULT_PIC = DEFAULT_PIC;
     readonly id = Number(this.route.snapshot.paramMap.get("id"));
 
-    profileInfo$ = this.profileService.getData(this.id);
     isLoading$ = this.profileService.isLoading$;
+    isError$ = this.profileService.isError$;
+
+    profileInfo$ = this.profileService.getData(this.id);
     userData$ = this.authService.userData$;
     isMineProdile$ = this.userData$.pipe(map((user) => user.id === this.id));
 

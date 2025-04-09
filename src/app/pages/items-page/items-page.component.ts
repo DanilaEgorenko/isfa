@@ -19,12 +19,15 @@ const NAMES = {
 export class ItemsPageComponent implements OnDestroy {
     type = this.router.url.split("/")[1];
     items$ = this.itemsApiService.getItems(this.type);
+    isLoading$ = this.itemsApiService.isLoading$;
+    isError$ = this.itemsApiService.isError$;
 
     constructor(
         private itemsApiService: ItemsApiService,
         private headerDataService: HeaderDataService,
         private router: Router
     ) {
+        this.isLoading$.subscribe((data) => console.log(data));
         this.headerDataService.updateData({ name: NAMES[this.type] });
     }
 

@@ -12,6 +12,8 @@ import { CryptoApiService, HeaderDataService } from "@app/services";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CryptoPageComponent implements OnInit {
+    isLoading$ = this.cryptoApiService.isLoading$;
+    isError$ = this.cryptoApiService.isError$;
     items$ = new BehaviorSubject([]);
     page = 1;
 

@@ -1,1 +1,4 @@
 <canvas #chartCanvas id="financialChart"></canvas>
+<ng-container *ngIf="!data?.length"
+    >Нет данных для отображения графика</ng-container
+>

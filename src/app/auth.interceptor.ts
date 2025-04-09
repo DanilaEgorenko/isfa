@@ -8,8 +8,7 @@ import {
 import { Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
-import { catchError, switchMap } from "rxjs/operators";
-import { AuthService } from "./services/auth.service";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

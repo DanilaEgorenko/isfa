@@ -1,4 +1,8 @@
 <div class="content">
+    <app-load-spinner
+        [isLoading]="isLoading$ | async"
+        [error]="isError$ | async"
+    ></app-load-spinner>
     <app-item
         *ngFor="let item of items$ | async"
         [item]="{

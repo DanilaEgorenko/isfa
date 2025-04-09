@@ -32,6 +32,9 @@ export class ItemPageComponent implements OnDestroy {
     readonly MARKET_TRAND_CONST = MARKET_TRAND_CONST;
     readonly id = this.route.snapshot.paramMap.get("id");
 
+    isLoading$ = this.itemsApiService.isLoading$;
+    isError$ = this.itemsApiService.isError$;
+
     isFavoriteSubject = new BehaviorSubject(false);
     isFavorite$ = this.isFavoriteSubject.asObservable();
 
@@ -43,7 +46,7 @@ export class ItemPageComponent implements OnDestroy {
     generatedPriceSubject = new BehaviorSubject(null);
     generatedPrice$ = this.generatedPriceSubject.asObservable();
 
-    item$ = this.sharesApiService.getById(this.id).pipe(
+    item$ = this.itemsApiService.getById(this.id).pipe(
         tap((item) => {
             this.headerDataService.updateData({
                 name: item.name,
@@ -75,7 +78,7 @@ export class ItemPageComponent implements OnDestroy {
     );
 
     constructor(
-        private sharesApiService: ItemsApiService,
+        private itemsApiService: ItemsApiService,
         private favoriteService: FavoriteService,
         private headerDataService: HeaderDataService,
         private virtualStockService: VirtualStockService,
