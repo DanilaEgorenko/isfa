@@ -12,6 +12,6 @@
             'background-color': this.getLogo(item) ? '' : 'var(--color-gray)'
         }"
     ></div>
-    <p class="name">{{ item.name }}</p>
+    <p class="name" [title]="item.name">{{ item.name }}</p>
     <app-price-change [change]="item.change"></app-price-change>
 </a>

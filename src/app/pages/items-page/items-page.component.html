@@ -3,8 +3,8 @@
         *ngFor="let item of items$ | async"
         [item]="{
             name: item.name,
-            isin: item.isin,
-            type: 'bonds',
+            isin: item.uid,
+            type: type,
             logo: item.brand.logoName,
             change: item.change
         }"

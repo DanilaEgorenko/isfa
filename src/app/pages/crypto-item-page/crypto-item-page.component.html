@@ -99,7 +99,7 @@
                 <div *ngIf="virtualStock$ | async as virtualStock">
                     <p>Количество: {{ virtualStock?.count || 0 }}</p>
                     <p>
-                        Сумма: {{ virtualStock?.value || 0 }}
+                        Сумма: {{ roundNumber(virtualStock?.value) || 0 }}
                         {{
                             getDiffCurrPrice(
                                 getVirtualPrice(

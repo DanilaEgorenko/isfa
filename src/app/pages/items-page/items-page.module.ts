@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { SharesPageComponent } from "./shares-page.component";
 import { RouterModule } from "@angular/router";
 import { ItemModule } from "@app/components/item/item.module";
+import { ItemsPageComponent } from "./items-page.component";
 
 export const routes = [
-    { path: "", component: SharesPageComponent },
+    { path: "", component: ItemsPageComponent },
     {
         path: ":id",
         loadChildren: () =>
@@ -17,6 +17,6 @@ export const routes = [
 
 @NgModule({
     imports: [CommonModule, RouterModule.forChild(routes), ItemModule],
-    declarations: [SharesPageComponent],
+    declarations: [ItemsPageComponent],
 })
-export class SharesPageModule {}
+export class ItemsPageModule {}

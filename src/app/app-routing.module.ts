@@ -46,38 +46,38 @@ export const routes: Routes = [
             ),
     },
     {
-        path: ERoutes.SHARES,
+        path: ERoutes.SHARE,
         loadChildren: () =>
-            import("./pages/shares-page/shares-page.module").then(
-                (m) => m.SharesPageModule
+            import("./pages/items-page/items-page.module").then(
+                (m) => m.ItemsPageModule
             ),
     },
     {
-        path: ERoutes.ETFS,
+        path: ERoutes.ETF,
         loadChildren: () =>
-            import("./pages/etf-page/etf-page.module").then(
-                (m) => m.EtfPageModule
+            import("./pages/items-page/items-page.module").then(
+                (m) => m.ItemsPageModule
             ),
     },
     {
-        path: ERoutes.BONDS,
+        path: ERoutes.BOND,
         loadChildren: () =>
-            import("./pages/bonds-page/bonds-page.module").then(
-                (m) => m.BondsPageModule
+            import("./pages/items-page/items-page.module").then(
+                (m) => m.ItemsPageModule
             ),
     },
     {
-        path: ERoutes.FUTURES,
+        path: ERoutes.OPTION,
         loadChildren: () =>
-            import("./pages/futures-page/futures-page.module").then(
-                (m) => m.FuturesPageModule
+            import("./pages/items-page/items-page.module").then(
+                (m) => m.ItemsPageModule
             ),
     },
     {
-        path: ERoutes.OPTIONS,
+        path: ERoutes.FUTURE,
         loadChildren: () =>
-            import("./pages/options-page/options-page.module").then(
-                (m) => m.OptionsPageModule
+            import("./pages/items-page/items-page.module").then(
+                (m) => m.ItemsPageModule
             ),
     },
 ];

@@ -2,11 +2,39 @@
 
 <div *ngIf="opened" class="menu">
     <nav (click)="opened = !opened">
-        <a [routerLink]="'/' + ERoutes.SHARES">Акции</a>
-        <a [routerLink]="'/' + ERoutes.ETFS">Паи</a>
-        <a [routerLink]="'/' + ERoutes.BONDS">Облигации</a>
-        <a [routerLink]="'/' + ERoutes.FUTURES">Фьючерсы</a>
-        <a [routerLink]="'/' + ERoutes.OPTIONS">Опционы</a>
-        <a [routerLink]="'/' + ERoutes.CRYPTO">Криптовалюта</a>
+        <a routerLink="/" routerLinkActive="active-link">Главная</a>
+        <a
+            [routerLink]="'/' + ERoutes.SHARE"
+            [state]="{ type: ERoutes.SHARE }"
+            routerLinkActive="active-link"
+            >Акции</a
+        >
+        <a
+            [routerLink]="'/' + ERoutes.ETF"
+            [state]="{ type: ERoutes.ETF }"
+            routerLinkActive="active-link"
+            >Паи</a
+        >
+        <a
+            [routerLink]="'/' + ERoutes.BOND"
+            [state]="{ type: ERoutes.BOND }"
+            routerLinkActive="active-link"
+            >Облигации</a
+        >
+        <a
+            [routerLink]="'/' + ERoutes.FUTURE"
+            [state]="{ type: ERoutes.FUTURE }"
+            routerLinkActive="active-link"
+            >Фьючерсы</a
+        >
+        <a
+            [routerLink]="'/' + ERoutes.OPTION"
+            [state]="{ type: ERoutes.OPTION }"
+            routerLinkActive="active-link"
+            >Опционы</a
+        >
+        <a [routerLink]="'/' + ERoutes.CRYPTO" routerLinkActive="active-link"
+            >Криптовалюта</a
+        >
     </nav>
 </div>

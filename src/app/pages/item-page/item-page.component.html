@@ -24,7 +24,7 @@
                     down: item.human_trand_down
                 }"
                 [userAction]="item.user_action"
-                [id]="item.figi"
+                [id]="item.uid"
             ></app-user-rating>
 
             <div class="container">
@@ -76,7 +76,7 @@
             <p class="subtitle">Для квалов</p>
             <p>{{ item.forQualInvestorFlag ? "Да" : "Нет" }}</p>
         </div>
-        <div class="container">
+        <!-- <div class="container">
             <p class="subtitle">Выход на биржу</p>
             <p>{{ item.ipoDate | date : "d.MM.y" }}</p>
         </div>
@@ -86,7 +86,7 @@
                 {{ item.issueSize }}
                 {{ getDiffCurrPrice(item.issueSizePlan, item.issueSize) }}
             </p>
-        </div>
+        </div> -->
         <div class="container">
             <p class="subtitle">Хорошая ликвидность</p>
             <p>{{ item.liquidityFlag ? "Да" : "Нет" }}</p>
@@ -107,7 +107,7 @@
             <p class="subtitle">Избранное</p>
             <button
                 [ngClass]="(isFavorite$ | async) ? 'red' : 'green'"
-                (click)="toggleFavorite(item.figi)"
+                (click)="toggleFavorite(item.uid)"
             >
                 {{ (isFavorite$ | async) ? "Убрать" : "Добавить" }}
             </button>
@@ -118,7 +118,7 @@
                 <div *ngIf="virtualStock$ | async as virtualStock">
                     <p>Количество: {{ virtualStock?.count || 0 }}</p>
                     <p>
-                        Сумма: {{ virtualStock?.value || 0 }}
+                        Сумма: {{ roundNumber(virtualStock?.value) || 0 }}
                         {{
                             getDiffCurrPrice(
                                 getVirtualPrice(
@@ -144,7 +144,7 @@
                             class="green"
                             (click)="
                                 manageVirtualStock(
-                                    item.figi,
+                                    item.uid,
                                     +quantity.value,
                                     'add',
                                     item.price
@@ -158,7 +158,7 @@
                             class="red"
                             (click)="
                                 manageVirtualStock(
-                                    item.figi,
+                                    item.uid,
                                     +quantity.value,
                                     'remove'
                                 )
@@ -173,7 +173,7 @@
     </div>
 
     <h2 class="block">Комментарии</h2>
-    <app-comments type="item" [id]="item.figi"></app-comments>
+    <app-comments type="item" [id]="item.uid"></app-comments>
 
     <ng-template #generateBtn>
         <button

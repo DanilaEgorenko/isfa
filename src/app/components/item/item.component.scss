@@ -16,10 +16,11 @@
     margin: 5px;
     align-items: center;
     justify-content: center;
-    height: 140px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     text-align: center;
     flex-grow: 1;
+    box-sizing: border-box;
 
     cursor: pointer;
 
@@ -50,7 +51,7 @@
 
 .name {
     font-size: 1.2rem;
-    width: 100px;
+    width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

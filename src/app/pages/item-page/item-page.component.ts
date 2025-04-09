@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import {
-    CryptoApiService,
     DestroyService,
     FavoriteService,
     HeaderDataService,
-    SharesApiService,
+    ItemsApiService,
     VirtualStockService,
 } from "@app/services";
-import { TranslateService } from "@app/services/translate.service";
 import { BehaviorSubject } from "rxjs";
 import { map, shareReplay, takeUntil, tap } from "rxjs/operators";
 import { MARKET_TRAND_CONST } from "./constants";
@@ -77,7 +75,7 @@ export class ItemPageComponent implements OnDestroy {
     );
 
     constructor(
-        private sharesApiService: SharesApiService,
+        private sharesApiService: ItemsApiService,
         private favoriteService: FavoriteService,
         private headerDataService: HeaderDataService,
         private virtualStockService: VirtualStockService,
