@@ -1,6 +1,6 @@
 <div class="container">
     <p class="subtitle">Пользовательский тренд</p>
-    <div *ngIf="userData$ | async; else needLogin" class="content">
+    <div class="content">
         <div class="user-rating-score">
             <ng-container *ngIf="humanTrand.up || humanTrand.down; else empty">
                 <div
@@ -19,7 +19,7 @@
                 </div>
             </ng-container>
         </div>
-        <div class="rating-buttons">
+        <div *ngIf="userData$ | async; else needLogin" class="rating-buttons">
             <button
                 *ngIf="userAction === 'none' || userAction === 'down'"
                 class="rating-button add_rating"
@@ -42,7 +42,8 @@
 
 <ng-template #needLogin
     ><p class="need-login">
-        Необходимо <a [routerLink]="['/login']">войти</a> в аккаут =(
+        Для голосования необходимо <a [routerLink]="['/login']">войти</a> в
+        аккаунт =(
     </p></ng-template
 >
 

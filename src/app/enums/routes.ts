@@ -1,5 +1,6 @@
 export enum ERoutes {
     MAIN = "",
+    EDIT = "edit",
     LOGIN = "login",
     REGISTRATION = "registration",
     PROFILE = "profile",

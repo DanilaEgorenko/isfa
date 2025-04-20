@@ -100,10 +100,10 @@
     flex-wrap: wrap;
 }
 
+.edit,
 .logout {
     margin: 15px;
     padding: 10px;
-    background-color: var(--color-red);
     appearance: none;
     border: none;
     height: 40px;
@@ -115,6 +115,14 @@
     &:hover {
         transform: scale(1.1);
     }
+}
+
+.edit {
+    background-color: var(--color-gray);
+}
+
+.logout {
+    background-color: var(--color-red);
 }
 
 @media (max-width: 768px) {

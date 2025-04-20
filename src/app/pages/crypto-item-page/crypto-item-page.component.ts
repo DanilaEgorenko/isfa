@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import {
+    AuthService,
     CryptoApiService,
     DestroyService,
     FavoriteService,
@@ -36,16 +37,18 @@ export class CryptoItemPageComponent implements OnDestroy {
     isLoading$ = this.cryptoApiService.isLoading$;
     isError$ = this.cryptoApiService.isError$;
 
-    isFavoriteSubject = new BehaviorSubject(false);
+    private isFavoriteSubject = new BehaviorSubject(false);
     isFavorite$ = this.isFavoriteSubject.asObservable();
 
-    virtualStockSubject = new BehaviorSubject(null);
+    private virtualStockSubject = new BehaviorSubject(null);
     virtualStock$ = this.virtualStockSubject.asObservable();
 
-    isGeneratingPriceSubject = new BehaviorSubject(false);
+    private isGeneratingPriceSubject = new BehaviorSubject(false);
     isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
-    generatedPriceSubject = new BehaviorSubject(null);
+    private generatedPriceSubject = new BehaviorSubject(null);
     generatedPrice$ = this.generatedPriceSubject.asObservable();
+
+    userData$ = this.authService.userData$;
 
     item$ = this.cryptoApiService.getById(this.id).pipe(
         tap(({ coin, favourite, virtual_stock }) => {
@@ -70,6 +73,7 @@ export class CryptoItemPageComponent implements OnDestroy {
         private favoriteService: FavoriteService,
         private headerDataService: HeaderDataService,
         private virtualStockService: VirtualStockService,
+        private authService: AuthService,
         private translateService: TranslateService,
         private route: ActivatedRoute,
         private destroy$: DestroyService

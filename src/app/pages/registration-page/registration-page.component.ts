@@ -9,7 +9,7 @@ import { takeUntil } from "rxjs/operators";
     selector: "app-registration-page",
     templateUrl: "./registration-page.component.html",
     styleUrls: ["./registration-page.component.scss"],
-    providers: [AuthService, DestroyService],
+    providers: [DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationPageComponent {

@@ -39,7 +39,10 @@
             >
                 {{ profileInfo.rating }}
             </p>
-            <div *ngIf="!(isMineProdile$ | async)" class="rating-buttons">
+            <div
+                *ngIf="!(isMineProdile$ | async) && userData$ | async"
+                class="rating-buttons"
+            >
                 <button class="rating-button add_rating" title="Добавить">
                     +
                 </button>
@@ -100,9 +103,12 @@
         </div>
     </div>
 
-    <button *ngIf="isMineProdile$ | async" class="logout" (click)="logout()">
-        Выйти из аккаунта
-    </button>
+    <ng-container *ngIf="isMineProdile$ | async">
+        <button class="edit" [routerLink]="['/', ERoutes.EDIT]">
+            Редактировать
+        </button>
+        <button class="logout" (click)="logout()">Выйти из аккаунта</button>
+    </ng-container>
 </ng-container>
 
 <ng-template #empty>

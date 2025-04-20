@@ -106,7 +106,7 @@
     </div>
 
     <h2 class="block">Действия</h2>
-    <div class="content">
+    <div *ngIf="userData$ | async; else needLogin" class="content">
         <div class="container">
             <p class="subtitle">Избранное</p>
             <button
@@ -191,3 +191,10 @@
         </button>
     </ng-template>
 </ng-container>
+
+<ng-template #needLogin
+    ><p class="need-login">
+        Необходимо
+        <a [routerLink]="['/login']">войти</a> в аккаунт =(
+    </p></ng-template
+>

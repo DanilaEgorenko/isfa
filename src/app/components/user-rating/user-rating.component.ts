@@ -20,7 +20,7 @@ export type UserAction = "up" | "down" | "none";
     selector: "app-user-rating",
     templateUrl: "./user-rating.component.html",
     styleUrls: ["./user-rating.component.scss"],
-    providers: [AuthService, DestroyService],
+    providers: [DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserRatingComponent {
@@ -28,16 +28,14 @@ export class UserRatingComponent {
     @Input() userAction: UserAction = "none";
     @Input() id: string | number;
 
-    userData$ = this.authService.userDataSubject.asObservable();
+    userData$ = this.authService.userData$;
 
     constructor(
         private authService: AuthService,
         private userRatingApiService: UserRatingApiService,
         private cdr: ChangeDetectorRef,
         private destroy$: DestroyService
-    ) {
-        this.authService.loadUserData();
-    }
+    ) {}
 
     getPercentages(trand: number): number {
         const allTrand = this.humanTrand.up + this.humanTrand.down;

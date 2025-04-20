@@ -27,7 +27,6 @@ export class ItemsPageComponent implements OnDestroy {
         private headerDataService: HeaderDataService,
         private router: Router
     ) {
-        this.isLoading$.subscribe((data) => console.log(data));
         this.headerDataService.updateData({ name: NAMES[this.type] });
     }
 

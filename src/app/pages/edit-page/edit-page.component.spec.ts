@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-import { ItemPageComponent } from "./item-page.component";
+import { EditPageComponent } from "./edit-page.component";
 
-describe("ItemPageComponent", () => {
-    let component: ItemPageComponent;
-    let fixture: ComponentFixture<ItemPageComponent>;
+describe("EditPageComponent", () => {
+    let component: EditPageComponent;
+    let fixture: ComponentFixture<EditPageComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [HttpClientTestingModule, RouterTestingModule],
-            declarations: [ItemPageComponent],
+            declarations: [EditPageComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ItemPageComponent);
+        fixture = TestBed.createComponent(EditPageComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

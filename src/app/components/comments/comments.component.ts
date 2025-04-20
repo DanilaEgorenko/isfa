@@ -38,7 +38,8 @@ export class CommentsComponent implements OnInit {
     @Input() type: "collection" | "item";
 
     comments$ = of([]);
-    userId$ = this.authService.userData$.pipe(map((user) => user?.id));
+    userData$ = this.authService.userData$;
+    userId$ = this.userData$.pipe(map((user) => user?.id));
 
     constructor(
         private authService: AuthService,
@@ -49,7 +50,6 @@ export class CommentsComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadComments();
-        this.authService.loadUserData();
     }
 
     loadComments() {

@@ -1,0 +1,12 @@
+<app-load-spinner
+    [isLoading]="isLoading$ | async"
+    [error]="isError$ | async"
+></app-load-spinner>
+<ng-container *ngIf="profileInfo$ | async as profileInfo">
+    <form [formGroup]="formGroup">
+        <input formControlName="name" placeholder="Имя" required="" />
+        <input formControlName="status" placeholder="Статус" required="" />
+        <input formControlName="pic" placeholder="URL фото" required="" />
+        <button (click)="sendEditData()">Сохранить</button>
+    </form>
+</ng-container>

@@ -8,4 +8,4 @@ export * from "./header-data.service";
 export * from "./items-api.service";
 export * from "./profile.service";
 export * from "./translate.service";
-export * from "./virtual-stock";
+export * from "./virtual-stock.service";

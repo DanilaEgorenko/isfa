@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DEFAULT_PIC } from "@app/constants";
+import { ERoutes } from "@app/enums";
 import { DestroyService } from "@app/services";
 import { AuthService } from "@app/services/auth.service";
 import { ProfileService } from "@app/services/profile.service";
 import { getLogo } from "@app/utils";
-import { map, takeUntil } from "rxjs/operators";
+import { map, takeUntil, tap } from "rxjs/operators";
 
 @Component({
     selector: "app-profile-page",
@@ -14,8 +15,9 @@ import { map, takeUntil } from "rxjs/operators";
     providers: [ProfileService, DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent {
     readonly getLogo = getLogo;
+    readonly ERoutes = ERoutes;
     readonly DEFAULT_PIC = DEFAULT_PIC;
     readonly id = Number(this.route.snapshot.paramMap.get("id"));
 
@@ -33,10 +35,6 @@ export class ProfilePageComponent implements OnInit {
         private route: ActivatedRoute,
         private destroy$: DestroyService
     ) {}
-
-    ngOnInit(): void {
-        this.authService.loadUserData();
-    }
 
     logout() {
         this.authService

@@ -13,7 +13,7 @@ export interface ILoginResponse {
 export class AuthService {
     private readonly apiUrl = "http://127.0.0.1:8000/api";
 
-    userDataSubject = new BehaviorSubject(null);
+    private userDataSubject = new BehaviorSubject(null);
     userData$ = this.userDataSubject.asObservable();
 
     constructor(private http: HttpClient) {}
@@ -32,7 +32,7 @@ export class AuthService {
     logout(): Observable<boolean> {
         sessionStorage.removeItem("access");
         sessionStorage.removeItem("refresh");
-        this.userDataSubject.next(null);
+        this.loadUserData();
         return of(true);
     }
 
@@ -61,6 +61,16 @@ export class AuthService {
                 this.loadUserData();
             })
         );
+    }
+
+    edit(params: {
+        name: string;
+        status: string;
+        pic: string;
+    }): Observable<any> {
+        return this.http
+            .post(`${this.apiUrl}/edit`, params)
+            .pipe(tap(() => this.loadUserData()));
     }
 
     parseToken(token: string) {

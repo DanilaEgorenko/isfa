@@ -3,13 +3,13 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { DestroyService } from "@app/services";
 import { AuthService } from "@app/services/auth.service";
-import { takeUntil } from "rxjs/operators";
+import { takeUntil, tap } from "rxjs/operators";
 
 @Component({
     selector: "app-login-page",
     templateUrl: "./login-page.component.html",
     styleUrls: ["./login-page.component.scss"],
-    providers: [AuthService, DestroyService],
+    providers: [DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {

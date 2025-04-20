@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import {
+    AuthService,
     DestroyService,
     FavoriteService,
     HeaderDataService,
@@ -35,16 +36,18 @@ export class ItemPageComponent implements OnDestroy {
     isLoading$ = this.itemsApiService.isLoading$;
     isError$ = this.itemsApiService.isError$;
 
-    isFavoriteSubject = new BehaviorSubject(false);
+    private isFavoriteSubject = new BehaviorSubject(false);
     isFavorite$ = this.isFavoriteSubject.asObservable();
 
-    virtualStockSubject = new BehaviorSubject(null);
+    private virtualStockSubject = new BehaviorSubject(null);
     virtualStock$ = this.virtualStockSubject.asObservable();
 
-    isGeneratingPriceSubject = new BehaviorSubject(false);
+    private isGeneratingPriceSubject = new BehaviorSubject(false);
     isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
-    generatedPriceSubject = new BehaviorSubject(null);
+    private generatedPriceSubject = new BehaviorSubject(null);
     generatedPrice$ = this.generatedPriceSubject.asObservable();
+
+    userData$ = this.authService.userData$;
 
     item$ = this.itemsApiService.getById(this.id).pipe(
         tap((item) => {
@@ -81,6 +84,7 @@ export class ItemPageComponent implements OnDestroy {
         private itemsApiService: ItemsApiService,
         private favoriteService: FavoriteService,
         private headerDataService: HeaderDataService,
+        private authService: AuthService,
         private virtualStockService: VirtualStockService,
         private route: ActivatedRoute,
         private destroy$: DestroyService

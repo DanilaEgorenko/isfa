@@ -11,6 +11,13 @@ export const routes: Routes = [
             ),
     },
     {
+        path: ERoutes.EDIT,
+        loadChildren: () =>
+            import("./pages/edit-page/edit-page.module").then(
+                (m) => m.EditPageModule
+            ),
+    },
+    {
         path: ERoutes.LOGIN,
         loadChildren: () =>
             import("./pages/login-page/login-page.module").then(

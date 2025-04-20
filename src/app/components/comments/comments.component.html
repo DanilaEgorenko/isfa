@@ -1,4 +1,4 @@
-<div class="comment-box">
+<div *ngIf="userData$ | async" class="comment-box">
     <textarea
         [(ngModel)]="comment"
         id="comment-textarea"

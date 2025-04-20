@@ -1,5 +1,10 @@
 import { Location } from "@angular/common";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    OnInit,
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { DEFAULT_PIC } from "@app/constants";
 import { ERoutes } from "@app/enums";
@@ -13,10 +18,10 @@ import { takeUntil } from "rxjs/operators";
     selector: "app-profile",
     templateUrl: "./profile.component.html",
     styleUrls: ["./profile.component.scss"],
-    providers: [DestroyService, AuthService],
+    providers: [DestroyService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
     readonly DEFAULT_PIC = DEFAULT_PIC;
 
     isMainPage$ = new BehaviorSubject<boolean>(false);
@@ -39,10 +44,6 @@ export class ProfileComponent implements OnInit {
                     this.router.url === `/${ERoutes.REGISTRATION}`
             );
         });
-    }
-
-    ngOnInit(): void {
-        this.authService.loadUserData();
     }
 
     back(): void {
