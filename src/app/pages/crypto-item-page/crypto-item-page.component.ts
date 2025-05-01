@@ -92,7 +92,7 @@ export class CryptoItemPageComponent implements OnDestroy {
             this.generatedPriceSubject.next(
                 this.roundNumber(Math.random() * (+highPrice - +price) + +price)
             );
-        }, 5000);
+        }, 3000);
     }
 
     toggleFavorite(id: string): void {

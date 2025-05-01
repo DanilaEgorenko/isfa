@@ -182,7 +182,7 @@
     <ng-template #generateBtn>
         <button
             [disabled]="isGeneratingPrice$ | async"
-            (click)="generatePrice(item.price * 2 + '', item.price)"
+            (click)="generatePrice(item.candles)"
             [ngClass]="{
                 'generating-price': isGeneratingPrice$ | async
             }"

@@ -6,6 +6,7 @@ export * from "./destroy.service";
 export * from "./favorite.service";
 export * from "./header-data.service";
 export * from "./items-api.service";
+export * from "./prediction.service";
 export * from "./profile.service";
 export * from "./translate.service";
 export * from "./virtual-stock.service";

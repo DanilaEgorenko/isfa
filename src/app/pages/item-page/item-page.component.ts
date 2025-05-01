@@ -7,9 +7,10 @@ import {
     HeaderDataService,
     ItemsApiService,
     VirtualStockService,
+    PredictionService,
 } from "@app/services";
 import { BehaviorSubject } from "rxjs";
-import { map, shareReplay, takeUntil, tap } from "rxjs/operators";
+import { finalize, map, shareReplay, takeUntil, tap } from "rxjs/operators";
 import { MARKET_TRAND_CONST } from "./constants";
 import {
     formatNumber,
@@ -42,12 +43,11 @@ export class ItemPageComponent implements OnDestroy {
     private virtualStockSubject = new BehaviorSubject(null);
     virtualStock$ = this.virtualStockSubject.asObservable();
 
-    private isGeneratingPriceSubject = new BehaviorSubject(false);
-    isGeneratingPrice$ = this.isGeneratingPriceSubject.asObservable();
     private generatedPriceSubject = new BehaviorSubject(null);
     generatedPrice$ = this.generatedPriceSubject.asObservable();
 
     userData$ = this.authService.userData$;
+    isGeneratingPrice$ = this.predictionService.isLoading$;
 
     item$ = this.itemsApiService.getById(this.id).pipe(
         tap((item) => {
@@ -86,6 +86,7 @@ export class ItemPageComponent implements OnDestroy {
         private headerDataService: HeaderDataService,
         private authService: AuthService,
         private virtualStockService: VirtualStockService,
+        private predictionService: PredictionService,
         private route: ActivatedRoute,
         private destroy$: DestroyService
     ) {}
@@ -94,14 +95,13 @@ export class ItemPageComponent implements OnDestroy {
         this.headerDataService.updateData(null);
     }
 
-    generatePrice(highPrice: string, price: string) {
-        this.isGeneratingPriceSubject.next(true);
-        setTimeout(() => {
-            this.isGeneratingPriceSubject.next(false);
-            this.generatedPriceSubject.next(
-                this.roundNumber(Math.random() * (+highPrice - +price) + +price)
+    generatePrice(candles: any[]) {
+        this.predictionService
+            .getPrediction({ candles })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((predictPrice) =>
+                this.generatedPriceSubject.next(predictPrice)
             );
-        }, 5000);
     }
 
     toggleFavorite(id: string): void {
