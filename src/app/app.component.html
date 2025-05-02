@@ -1,5 +1,11 @@
-<app-menu></app-menu>
-<app-profile></app-profile>
-<div class="content">
-    <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="isOnline$ | async; else offline">
+    <app-menu></app-menu>
+    <app-profile></app-profile>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>
+
+<ng-template #offline>
+    <h1 class="offline">Нет подключения к интернету</h1>
+</ng-template>

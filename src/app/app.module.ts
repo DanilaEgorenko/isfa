@@ -8,6 +8,7 @@ import { AuthInterceptor } from "./auth.interceptor";
 import { MenuComponent } from "./components/menu/menu.component";
 import { PriceChangeModule } from "./components/price-change/price-change.module";
 import { ProfileComponent } from "./components/profile/profile.component";
+import { ServiceWorkerModule } from "@angular/service-worker";
 
 @NgModule({
     declarations: [AppComponent, MenuComponent, ProfileComponent],
@@ -16,6 +17,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
         AppRoutingModule,
         HttpClientModule,
         PriceChangeModule,
+        ServiceWorkerModule.register("ngsw-worker.js"),
     ],
     bootstrap: [AppComponent],
     providers: [
