@@ -9,3 +9,4 @@ export * from "./items-api.service";
 export * from "./prediction.service";
 export * from "./profile.service";
 export * from "./virtual-stock.service";
+export * from "./user-rating-api.service";

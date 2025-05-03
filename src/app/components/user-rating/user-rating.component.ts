@@ -5,8 +5,7 @@ import {
     Input,
 } from "@angular/core";
 import { AuthService } from "@app/services/auth.service";
-import { UserRatingApiService } from "./user-rating-api.service";
-import { DestroyService } from "@app/services";
+import { DestroyService, UserRatingApiService } from "@app/services";
 import { takeUntil } from "rxjs/operators";
 
 export interface IHumanTrand {

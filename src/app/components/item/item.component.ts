@@ -1,9 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    Input,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { IItem } from "@app/interfaces";
 import { getLogo } from "@app/utils";
 
