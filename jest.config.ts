@@ -7,6 +7,15 @@ module.exports = {
     transformIgnorePatterns: [
         "node_modules/(?!(jest-preset-angular|@angular|rxjs)/)",
     ],
+    collectCoverage: true,
+    coverageReporters: ["text", "html"],
+    coveragePathIgnorePatterns: [
+        "/node_modules/",
+        "\\.interfaces\\.ts$",
+        "\\.types\\.ts$",
+        "\\.enums\\.ts$",
+        "\\.constants\\.ts$",
+    ],
     moduleNameMapper: {
         "^@app/(.*)$": "<rootDir>/src/app/$1",
     },

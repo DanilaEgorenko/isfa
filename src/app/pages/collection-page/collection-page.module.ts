@@ -13,7 +13,6 @@ const routes = [{ path: ":id", component: CollectionPageComponent }];
         CommonModule,
         RouterModule.forChild(routes),
         UserRatingModule,
-        UserRatingModule,
         ItemModule,
         CommentsModule,
     ],

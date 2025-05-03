@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { CollectionService, CryptoApiService } from "@app/services";
 import { map } from "rxjs/operators";
-import { MainApiService } from "./main-api.service";
 
 @Component({
     selector: "app-main-page",
@@ -24,7 +23,5 @@ export class MainPageComponent {
     constructor(
         private cryptoApiService: CryptoApiService,
         private collectionService: CollectionService
-    ) {
-        //this.mainApiService.getLogoCompany("RU000A0D8MM8").subscribe();
-    }
+    ) {}
 }
