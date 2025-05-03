@@ -6,20 +6,10 @@ import {
     ChangeDetectorRef,
 } from "@angular/core";
 import { DEFAULT_PIC } from "@app/constants";
+import { IComment } from "@app/interfaces";
 import { AuthService, CommentsService, DestroyService } from "@app/services";
 import { Observable, of } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
-
-export interface IComment {
-    id: number;
-    text: string;
-    date: string;
-    author: {
-        id: number;
-        username: string;
-        avatar: string;
-    };
-}
 
 @Component({
     selector: "app-comments",
@@ -37,7 +27,7 @@ export class CommentsComponent implements OnInit {
     @Input() id: string | number;
     @Input() type: "collection" | "item";
 
-    comments$ = of([]);
+    comments$ = of<IComment[]>([]);
     userData$ = this.authService.userData$;
     userId$ = this.userData$.pipe(map((user) => user?.id));
 

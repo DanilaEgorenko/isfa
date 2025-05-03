@@ -1,30 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { UserAction } from "@app/components/user-rating/user-rating.component";
+import { ICollection, IShortCollection } from "@app/interfaces";
 import { BehaviorSubject, EMPTY } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
-
-export interface IShortCollection {
-    id: number;
-    name: string;
-    short_description: string;
-    pic: string;
-}
-
-export interface ICollection {
-    id: number;
-    name: string;
-    description: string;
-    short_description: string;
-    pic: string;
-    color: string | null;
-    retail_trand: number;
-    human_trand_up: number;
-    human_trand_down: number;
-    user_action: UserAction;
-    items: any[];
-    comments: any[];
-}
 
 @Injectable({ providedIn: "root" })
 export class CollectionService {

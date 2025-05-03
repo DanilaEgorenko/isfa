@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { UserAction } from "@app/components/user-rating/user-rating.component";
+import { UserAction } from "@app/types";
 
 @Injectable({ providedIn: "root" })
 export class UserRatingApiService {

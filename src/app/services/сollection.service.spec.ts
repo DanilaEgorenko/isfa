@@ -3,11 +3,8 @@ import {
     HttpClientTestingModule,
     HttpTestingController,
 } from "@angular/common/http/testing";
-import {
-    CollectionService,
-    ICollection,
-    IShortCollection,
-} from "./collection.service";
+import { CollectionService } from "./collection.service";
+import { ICollection, IShortCollection } from "@app/interfaces";
 
 describe("CollectionService", () => {
     let service: CollectionService;

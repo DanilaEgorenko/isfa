@@ -1,13 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ILoginResponse } from "@app/interfaces";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { ProfileService } from "./profile.service";
-
-export interface ILoginResponse {
-    access: string;
-    refresh: string;
-}
 
 @Injectable({ providedIn: "root" })
 export class AuthService {

@@ -4,7 +4,7 @@ import {
     HttpTestingController,
 } from "@angular/common/http/testing";
 import { UserRatingApiService } from "./user-rating-api.service";
-import { UserAction } from "@app/components/user-rating/user-rating.component";
+import { UserAction } from "@app/types";
 
 describe("UserRatingApiService", () => {
     let service: UserRatingApiService;

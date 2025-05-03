@@ -7,13 +7,8 @@ import {
 import { AuthService } from "@app/services/auth.service";
 import { DestroyService, UserRatingApiService } from "@app/services";
 import { takeUntil } from "rxjs/operators";
-
-export interface IHumanTrand {
-    up: number;
-    down: number;
-}
-
-export type UserAction = "up" | "down" | "none";
+import { IHumanTrand } from "@app/interfaces";
+import { UserAction } from "@app/types";
 
 @Component({
     selector: "app-user-rating",
