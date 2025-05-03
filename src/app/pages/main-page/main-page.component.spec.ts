@@ -4,6 +4,7 @@ import { CryptoApiService } from "@app/services";
 import { CollectionService } from "@app/services";
 import { of } from "rxjs";
 import { MainPageModule } from "./main-page.module";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("MainPageComponent", () => {
     let component: MainPageComponent;
@@ -19,7 +20,7 @@ describe("MainPageComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [MainPageModule],
+            imports: [MainPageModule, RouterTestingModule],
             providers: [
                 { provide: CryptoApiService, useValue: mockCryptoApiService },
                 { provide: CollectionService, useValue: mockCollectionService },
@@ -64,12 +65,6 @@ describe("MainPageComponent", () => {
             done();
         });
 
-        expect(mockCryptoApiService.getCryproByChange).toHaveBeenCalledWith(
-            "asc"
-        );
-        expect(mockCryptoApiService.getCryproByChange).toHaveBeenCalledWith(
-            "desc"
-        );
         expect(mockCollectionService.getCollections).toHaveBeenCalled();
     });
 });

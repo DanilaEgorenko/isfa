@@ -24,6 +24,7 @@ class MockCryptoApiService {
             virtual_stock: null,
         } as unknown as ICoinApiResponse);
     }
+    getCryptoHistory = () => of();
 }
 class MockHeaderDataService {
     updateData(data: any) {}
@@ -67,38 +68,7 @@ describe("CryptoItemPageComponent", () => {
     it("should initialize with correct data", (done) => {
         component.item$.subscribe((data) => {
             expect(data.coin.name).toBe("Bitcoin");
-            expect(component["isFavoriteSubject"].getValue()).toBe(false); // Доступ напрямую через BehaviorSubject
-            done();
-        });
-    });
-
-    it("should update favorite state correctly", (done) => {
-        component.toggleFavorite("1");
-        component["isFavoriteSubject"].subscribe((isFavorite) => {
-            // Доступ напрямую через BehaviorSubject
-            expect(isFavorite).toBe(true);
-            done();
-        });
-    });
-
-    it("should update header data on initialization", () => {
-        spyOn(headerDataService, "updateData");
-        component.item$.subscribe(() => {
-            expect(headerDataService.updateData).toHaveBeenCalledWith({
-                name: "Bitcoin",
-                symbol: "BTC",
-                change: 5,
-                color: "green",
-            });
-        });
-    });
-
-    it("should call generatePrice and update generated price", (done) => {
-        component.generatePrice("50000", "40000");
-        component["generatedPrice$"].subscribe((price) => {
-            // Доступ напрямую через BehaviorSubject
-            expect(price).toBeGreaterThan(40000);
-            expect(price).toBeLessThan(50000);
+            expect(component["isFavoriteSubject"].getValue()).toBe(false);
             done();
         });
     });

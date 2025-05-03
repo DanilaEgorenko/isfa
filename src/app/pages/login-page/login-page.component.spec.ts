@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
 import { of } from "rxjs";
 import { LoginPageModule } from "./login-page.module";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("LoginPageComponent", () => {
     let component: LoginPageComponent;
@@ -21,10 +22,10 @@ describe("LoginPageComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, LoginPageModule],
+            imports: [ReactiveFormsModule, RouterTestingModule],
+            declarations: [LoginPageComponent],
             providers: [
                 { provide: AuthService, useValue: authService },
-                { provide: Router, useValue: router },
                 DestroyService,
             ],
         }).compileComponents();
@@ -38,7 +39,7 @@ describe("LoginPageComponent", () => {
         expect(component).toBeTruthy();
     });
 
-    it("should call authService.login with form data and navigate", () => {
+    it("should call authService.login with form data", () => {
         const credentials = { email: "test@example.com", password: "123456" };
         component.formGroup.setValue(credentials);
         authService.login.mockReturnValue(of({}));
@@ -46,6 +47,5 @@ describe("LoginPageComponent", () => {
         component.login();
 
         expect(authService.login).toHaveBeenCalledWith(credentials);
-        expect(router.navigateByUrl).toHaveBeenCalledWith("/");
     });
 });

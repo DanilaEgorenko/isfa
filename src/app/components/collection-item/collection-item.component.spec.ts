@@ -17,7 +17,7 @@ describe("CollectionItemComponent", () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [CollectionItemComponent],
-            imports: [RouterTestingModule], // для тестирования routerLink
+            imports: [RouterTestingModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CollectionItemComponent);

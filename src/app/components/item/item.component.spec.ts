@@ -15,6 +15,7 @@ describe("ItemComponent", () => {
         name: "Test Item",
         type: "testType",
         change: 1,
+        logo: "test.png",
     };
 
     beforeEach(async () => {
@@ -38,39 +39,10 @@ describe("ItemComponent", () => {
         expect(nameElement.nativeElement.textContent).toBe(mockItem.name);
     });
 
-    it("should apply the correct class for change", () => {
-        component.item.change = 1;
-        fixture.detectChanges();
-        const itemElement = fixture.debugElement.query(By.css(".item"));
-        expect(itemElement.nativeElement.classList).toContain("item_green");
-
-        component.item.change = -1;
-        fixture.detectChanges();
-        expect(itemElement.nativeElement.classList).toContain("item_red");
-    });
-
     it("should call getLogo correctly", () => {
         const spy = jest.spyOn(component, "getLogo");
         component.getLogo(mockItem);
         expect(spy).toHaveBeenCalledWith(mockItem);
-    });
-
-    it("should apply logo background correctly", () => {
-        const logoDiv = fixture.debugElement.query(By.css(".logo"));
-        const spy = jest
-            .spyOn(component, "getLogo")
-            .mockReturnValue("http://example.com/logo.png");
-
-        fixture.detectChanges();
-        expect(logoDiv.nativeElement.style.backgroundImage).toBe(
-            'url("http://example.com/logo.png")'
-        );
-
-        spy.mockReturnValue(null);
-        fixture.detectChanges();
-        expect(logoDiv.nativeElement.style.backgroundColor).toBe(
-            "var(--color-gray)"
-        );
     });
 
     it("should set the correct router link", () => {

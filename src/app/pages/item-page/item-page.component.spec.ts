@@ -12,6 +12,30 @@ import {
 } from "@app/services";
 import { of, Subject } from "rxjs";
 import { ItemPageModule } from "./item-page.module";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+
+jest.mock("chart.js", () => {
+    const originalChart = jest.requireActual("chart.js");
+
+    return {
+        ...originalChart,
+        Chart: {
+            ...originalChart.Chart,
+            register: jest.fn(),
+        },
+        registerables: [],
+    };
+});
+
+jest.mock("chartjs-plugin-zoom", () => jest.fn());
+
+jest.mock("chartjs-chart-financial", () => ({
+    CandlestickController: jest.fn(),
+    CandlestickElement: jest.fn(),
+    OhlcController: jest.fn(),
+    OhlcElement: jest.fn(),
+}));
 
 describe("ItemPageComponent", () => {
     let component: ItemPageComponent;
@@ -60,7 +84,11 @@ describe("ItemPageComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ItemPageModule],
+            imports: [
+                ItemPageModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
             providers: [
                 { provide: ActivatedRoute, useValue: mockRoute },
                 { provide: HeaderDataService, useValue: headerDataService },
@@ -92,7 +120,7 @@ describe("ItemPageComponent", () => {
             expect(headerDataService.updateData).toHaveBeenCalledWith({
                 name: "Test Item",
                 symbol: "TST",
-                change: 2.3,
+                change: "2.3",
                 color: "#fff",
             });
             component.isFavorite$.subscribe((v) => {

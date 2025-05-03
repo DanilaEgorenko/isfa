@@ -6,6 +6,7 @@ module.exports = {
     },
     transformIgnorePatterns: [
         "node_modules/(?!(jest-preset-angular|@angular|rxjs)/)",
+        "/node_modules/(?!chart.js)/",
     ],
     collectCoverage: true,
     coverageReporters: ["text", "html"],

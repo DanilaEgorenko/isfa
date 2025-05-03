@@ -10,7 +10,7 @@ import { tap } from "rxjs/operators";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollectionPageComponent implements OnDestroy {
-    readonly id = Number(this.route.snapshot.paramMap.get("id"));
+    id = Number(this.route.snapshot.paramMap.get("id"));
 
     collection$ = this.collectionService.getCollectionById(this.id).pipe(
         tap((collection) => {

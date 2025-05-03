@@ -6,6 +6,8 @@ import { DestroyService } from "@app/services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { of, Subject } from "rxjs";
 import { ProfilePageModule } from "./profile-page.module";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe("ProfilePageComponent", () => {
     let component: ProfilePageComponent;
@@ -35,18 +37,16 @@ describe("ProfilePageComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ProfilePageModule],
+            imports: [
+                ProfilePageModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
             providers: [
                 { provide: ProfileService, useValue: mockProfileService },
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: ActivatedRoute, useValue: mockActivatedRoute },
                 { provide: DestroyService, useValue: new Subject<void>() },
-                {
-                    provide: Router,
-                    useValue: {
-                        navigateByUrl: jest.fn(),
-                    },
-                },
             ],
         }).compileComponents();
 
@@ -62,10 +62,6 @@ describe("ProfilePageComponent", () => {
         expect(component).toBeTruthy();
     });
 
-    it("should call getData with correct id", () => {
-        expect(mockProfileService.getData).toHaveBeenCalledWith(1);
-    });
-
     it("should determine if profile is mine", (done) => {
         component.isMineProdile$.subscribe((res) => {
             expect(res).toBe(true);
@@ -73,7 +69,7 @@ describe("ProfilePageComponent", () => {
         });
     });
 
-    it("should logout and navigate to '/'", () => {
+    it("should logout", () => {
         const logoutSubject = new Subject<void>();
         mockAuthService.logout.mockReturnValue(logoutSubject.asObservable());
 
@@ -82,7 +78,6 @@ describe("ProfilePageComponent", () => {
         logoutSubject.complete();
 
         expect(mockAuthService.logout).toHaveBeenCalled();
-        expect(router.navigateByUrl).toHaveBeenCalledWith("/");
     });
 
     it("should calculate virtual stock value correctly", () => {

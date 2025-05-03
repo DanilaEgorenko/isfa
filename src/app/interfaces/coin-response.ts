@@ -1,6 +1,6 @@
 import { EMarketTrand } from "@app/pages/crypto-item-page/enums";
 import { ICoin } from "./coin";
-import { UserAction } from "@app/components/user-rating/user-rating.component";
+import { UserAction } from "@app/types";
 
 export interface ICoinApiResponse {
     status: string;

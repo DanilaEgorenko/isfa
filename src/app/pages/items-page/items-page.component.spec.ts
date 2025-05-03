@@ -4,6 +4,11 @@ import { ItemsApiService, HeaderDataService } from "@app/services";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
 import { ItemsPageModule } from "./items-page.module";
+import { RouterTestingModule } from "@angular/router/testing";
+
+const mockRouter = {
+    url: "/share",
+};
 
 describe("ItemsPageComponent", () => {
     let component: ItemsPageComponent;
@@ -19,17 +24,13 @@ describe("ItemsPageComponent", () => {
         isError$: of(false),
     };
 
-    const router = {
-        url: "/share",
-    };
-
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ItemsPageModule],
+            imports: [ItemsPageModule, RouterTestingModule],
             providers: [
                 { provide: ItemsApiService, useValue: itemsApiService },
                 { provide: HeaderDataService, useValue: headerDataService },
-                { provide: Router, useValue: router },
+                { provide: Router, useValue: mockRouter },
             ],
         }).compileComponents();
 

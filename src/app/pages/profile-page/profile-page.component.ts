@@ -19,7 +19,7 @@ export class ProfilePageComponent {
     readonly getLogo = getLogo;
     readonly ERoutes = ERoutes;
     readonly DEFAULT_PIC = DEFAULT_PIC;
-    readonly id = Number(this.route.snapshot.paramMap.get("id"));
+    id = Number(this.route.snapshot.paramMap.get("id"));
 
     isLoading$ = this.profileService.isLoading$;
     isError$ = this.profileService.isError$;

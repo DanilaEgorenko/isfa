@@ -6,6 +6,8 @@ import { of } from "rxjs";
 import { ChangeDetectorRef } from "@angular/core";
 import { UserRatingModule } from "./user-rating.module";
 import { UserRatingApiService } from "@app/services";
+import { RouterTestingModule } from "@angular/router/testing";
+import { CommonModule } from "@angular/common";
 
 describe("UserRatingComponent", () => {
     let component: UserRatingComponent;
@@ -19,7 +21,8 @@ describe("UserRatingComponent", () => {
         } as any;
 
         await TestBed.configureTestingModule({
-            imports: [UserRatingModule],
+            imports: [CommonModule, RouterTestingModule],
+            declarations: [UserRatingComponent],
             providers: [
                 DestroyService,
                 {
@@ -44,7 +47,6 @@ describe("UserRatingComponent", () => {
         ) as jest.Mocked<UserRatingApiService>;
         cdr = TestBed.inject(ChangeDetectorRef);
 
-        // начальные значения
         component.humanTrand = { up: 3, down: 2 };
         component.userAction = "none";
         component.id = "123";
@@ -79,7 +81,6 @@ describe("UserRatingComponent", () => {
             "down",
             "collections"
         );
-        // Обновление данных происходит в подписке — проверяется после flush или вручную
     });
 
     it("should toggle vote off when voting same again", () => {
@@ -91,7 +92,5 @@ describe("UserRatingComponent", () => {
         component.vote("up");
 
         expect(userRatingApiService.vote).toHaveBeenCalled();
-        // В реальном случае после subscribe должно быть:
-        // humanTrand.up -= 1 и userAction = 'none'
     });
 });

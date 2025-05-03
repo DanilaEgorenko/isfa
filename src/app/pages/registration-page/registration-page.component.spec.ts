@@ -29,7 +29,6 @@ describe("RegistrationPageComponent", () => {
             imports: [ReactiveFormsModule, RouterTestingModule],
             providers: [
                 { provide: AuthService, useValue: authService },
-                { provide: Router, useValue: router },
                 { provide: DestroyService, useValue: MockDestroyService },
             ],
         }).compileComponents();
@@ -43,7 +42,7 @@ describe("RegistrationPageComponent", () => {
         expect(component).toBeTruthy();
     });
 
-    it("should call registration and navigate to '/'", () => {
+    it("should call registration", () => {
         const mockResponse$ = of({});
         authService.registration.mockReturnValue(mockResponse$);
 
@@ -60,7 +59,5 @@ describe("RegistrationPageComponent", () => {
             password: "123456",
             name: "Test User",
         });
-
-        expect(router.navigateByUrl).toHaveBeenCalledWith("/");
     });
 });

@@ -6,7 +6,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "npm run jest:run:changed -- --watch",
-    "jest:run:changed": "cross-env COVERAGE_BUDGET=0 NODE_OPTIONS=--experimental-vm-modules node --expose-gc --no-compilation-cache ./node_modules/jest/bin/jest.js --logHeapUsage"
+    "jest:run:changed": "cross-env COVERAGE_BUDGET=0 NODE_OPTIONS=--experimental-vm-modules node --expose-gc --no-compilation-cache ./node_modules/jest/bin/jest.js --coverage --logHeapUsage --detect-open-handles"
   },
   "private": true,
   "dependencies": {

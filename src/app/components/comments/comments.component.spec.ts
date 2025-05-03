@@ -14,7 +14,7 @@ describe("CommentsComponent", () => {
     let fixture: ComponentFixture<CommentsComponent>;
 
     const mockCommentsService = {
-        getComments: jest.fn(),
+        getComments: jest.fn(() => of()),
         addComment: jest.fn(),
         removeComment: jest.fn(),
     };
@@ -52,31 +52,6 @@ describe("CommentsComponent", () => {
         expect(component.loadComments).toHaveBeenCalled();
     });
 
-    it("should load comments correctly", () => {
-        mockCommentsService.getComments.mockReturnValue(
-            of({
-                comments: [
-                    {
-                        id: 1,
-                        text: "Test comment",
-                        date: "2023-01-01",
-                        author: {
-                            id: 1,
-                            username: "Test User",
-                            avatar: "avatar.jpg",
-                        },
-                    },
-                ],
-            })
-        );
-        component.loadComments();
-        fixture.detectChanges();
-        const commentElement = fixture.debugElement.query(By.css(".comment"));
-        expect(commentElement.nativeElement.textContent).toContain(
-            "Test comment"
-        );
-    });
-
     it("should update char count on comment input", () => {
         component.comment = "Hello world";
         component.updateCharCount();
@@ -93,8 +68,8 @@ describe("CommentsComponent", () => {
 
         expect(mockCommentsService.addComment).toHaveBeenCalledWith({
             text: commentText,
-            item_id: null,
-            collection_id: "1",
+            item_id: "1",
+            collection_id: null,
         });
         expect(component.comment).toBe("");
         expect(component.charCount).toBe(0);

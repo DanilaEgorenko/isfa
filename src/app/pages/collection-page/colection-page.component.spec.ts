@@ -13,7 +13,7 @@ describe("CollectionPageComponent", () => {
 
     beforeEach(async () => {
         mockCollectionService = {
-            getCollectionById: jest.fn(),
+            getCollectionById: jest.fn(() => of()),
         };
 
         mockHeaderDataService = {
@@ -47,6 +47,7 @@ describe("CollectionPageComponent", () => {
     });
 
     it("should initialize collection$ with correct id and update header", () => {
+        component.id = 42;
         const mockCollection = { name: "Test Collection" };
         mockCollectionService.getCollectionById.mockReturnValue(
             of(mockCollection)

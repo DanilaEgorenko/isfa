@@ -1,9 +1,4 @@
-import {
-    ComponentFixture,
-    TestBed,
-    fakeAsync,
-    flush,
-} from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CryptoPageComponent } from "./crypto-page.component";
 import { CryptoApiService } from "@app/services";
 import { of } from "rxjs";
@@ -47,5 +42,9 @@ describe("CryptoPageComponent", () => {
         component = fixture.componentInstance;
         cryptoApiService = TestBed.inject(CryptoApiService);
         fixture.detectChanges();
+    });
+
+    it("should create the component", () => {
+        expect(component).toBeTruthy();
     });
 });
