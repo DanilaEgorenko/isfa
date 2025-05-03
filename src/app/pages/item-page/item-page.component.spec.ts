@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { ItemPageComponent } from "./item-page.component";
+import { ItemsPageModule } from "../items-page/items-page.module";
+import { ItemPageModule } from "./item-page.module";
 
 describe("ItemPageComponent", () => {
     let component: ItemPageComponent;
@@ -9,8 +11,11 @@ describe("ItemPageComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule, RouterTestingModule],
-            declarations: [ItemPageComponent],
+            imports: [
+                HttpClientTestingModule,
+                RouterTestingModule,
+                ItemPageModule,
+            ],
         }).compileComponents();
     });
 

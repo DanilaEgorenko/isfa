@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { MainPageComponent } from "./main-page.component";
+import { MainPageModule } from "./main-page.module";
 
 describe("MainPageComponent", () => {
     let component: MainPageComponent;
@@ -9,8 +10,11 @@ describe("MainPageComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule, RouterTestingModule],
-            declarations: [MainPageComponent],
+            imports: [
+                HttpClientTestingModule,
+                RouterTestingModule,
+                MainPageModule,
+            ],
         }).compileComponents();
     });
 

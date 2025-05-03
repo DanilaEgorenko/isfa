@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-import { ItemsPageComponent } from "./items-page.component";
-import { ItemsPageModule } from "./items-page.module";
+import { PriceChangeComponent } from "./price-change.component";
+import { PriceChangeModule } from "./price-change.module";
 
-describe("ItemsPageComponent", () => {
-    let component: ItemsPageComponent;
-    let fixture: ComponentFixture<ItemsPageComponent>;
+describe("PriceChangeComponent", () => {
+    let component: PriceChangeComponent;
+    let fixture: ComponentFixture<PriceChangeComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
                 RouterTestingModule,
-                ItemsPageModule,
+                PriceChangeModule,
             ],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ItemsPageComponent);
+        fixture = TestBed.createComponent(PriceChangeComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

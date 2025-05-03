@@ -8,7 +8,6 @@ import {
     HeaderDataService,
     VirtualStockService,
 } from "@app/services";
-import { TranslateService } from "@app/services/translate.service";
 import { BehaviorSubject } from "rxjs";
 import { map, takeUntil, tap } from "rxjs/operators";
 import { MARKET_TRAND_CONST } from "./constants";
@@ -74,7 +73,6 @@ export class CryptoItemPageComponent implements OnDestroy {
         private headerDataService: HeaderDataService,
         private virtualStockService: VirtualStockService,
         private authService: AuthService,
-        private translateService: TranslateService,
         private route: ActivatedRoute,
         private destroy$: DestroyService
     ) {
@@ -120,10 +118,4 @@ export class CryptoItemPageComponent implements OnDestroy {
                 });
             });
     }
-
-    // translate(text: string): Observable<string> {
-    //     if (!text) return;
-
-    //     return this.translateService.translate(text);
-    // }
 }

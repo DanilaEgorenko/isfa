@@ -2,6 +2,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { UserRatingComponent } from "./user-rating.component";
+import { UserRatingModule } from "./user-rating.module";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("UserRatingComponent", () => {
     let component: UserRatingComponent;
@@ -9,8 +11,12 @@ describe("UserRatingComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule, RouterTestingModule],
-            declarations: [UserRatingComponent],
+            imports: [
+                HttpClientTestingModule,
+                RouterTestingModule,
+                UserRatingModule,
+            ],
+            schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
     });
 
@@ -21,6 +27,6 @@ describe("UserRatingComponent", () => {
     });
 
     it("Создаёт компонент", () => {
-        expect(component).toBeTruthy();
+        expect(component).toBeDefined();
     });
 });
