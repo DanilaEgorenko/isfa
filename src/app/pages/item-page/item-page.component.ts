@@ -13,6 +13,7 @@ import { BehaviorSubject } from "rxjs";
 import { finalize, map, shareReplay, takeUntil, tap } from "rxjs/operators";
 import { MARKET_TRAND_CONST } from "./constants";
 import {
+    calculateBondYield,
     formatNumber,
     getDiffCurrPrice,
     getVirtualPrice,
@@ -31,6 +32,7 @@ export class ItemPageComponent implements OnDestroy {
     readonly roundNumber = roundNumber;
     readonly getDiffCurrPrice = getDiffCurrPrice;
     readonly getVirtualPrice = getVirtualPrice;
+    readonly calculateBondYield = calculateBondYield;
     readonly MARKET_TRAND_CONST = MARKET_TRAND_CONST;
     readonly id = this.route.snapshot.paramMap.get("id");
 

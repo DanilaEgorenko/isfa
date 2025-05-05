@@ -49,6 +49,51 @@
 
     <h2 class="block">Данные</h2>
     <div class="content">
+        <ng-container *ngIf="item.instrumentType === 'bond'">
+            <ng-container
+                *ngIf="
+                    calculateBondYield(
+                        item.bond_info.nominal,
+                        item.bond_info.nkd,
+                        item.bond_info.coupon,
+                        item.bond_info.coupons_per_year,
+                        item.bond_info.maturity_date
+                    ) as bondInfo
+                "
+            >
+                <div class="container">
+                    <p class="subtitle">Общий заработок</p>
+                    <p>
+                        {{ bondInfo.totalIncome }} (+{{
+                            bondInfo.totalIncomePercentage
+                        }}
+                        %)
+                    </p>
+                </div>
+                <div class="container">
+                    <p class="subtitle">Доходность годовых</p>
+                    <p>+{{ bondInfo.annualYield }}%</p>
+                </div>
+                <div class="container">
+                    <p class="subtitle">Дней до погашения</p>
+                    <p>{{ bondInfo.daysToMaturity }}</p>
+                </div>
+                <div class="container">
+                    <p class="subtitle">Сумма купонных выплат</p>
+                    <p>{{ bondInfo.totalCoupons }}</p>
+                </div>
+                <div class="container">
+                    <p class="subtitle">Общие вложения</p>
+                    <p>{{ bondInfo.investment }}</p>
+                </div>
+                <div class="container">
+                    <p class="subtitle">Дата погашения</p>
+                    <p>
+                        {{ item.bond_info.maturity_date | date : "dd.MM.yyyy" }}
+                    </p>
+                </div>
+            </ng-container>
+        </ng-container>
         <div *ngIf="item?.price" class="container">
             <p class="subtitle">Цена за шт (за лот)</p>
             <p>
