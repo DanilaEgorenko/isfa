@@ -1,4 +1,4 @@
-<div *ngIf="userData$ | async" class="comment-box">
+<div *ngIf="userData$ | async; else login" class="comment-box">
     <textarea
         [(ngModel)]="comment"
         id="comment-textarea"
@@ -50,3 +50,5 @@
         </div>
     </div>
 </ng-container>
+
+<ng-template #login>Войдите в аккаунт</ng-template>
